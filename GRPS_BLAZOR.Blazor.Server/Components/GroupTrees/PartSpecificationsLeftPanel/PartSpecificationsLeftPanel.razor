@@ -1,0 +1,37 @@
+﻿@inherits PartSpecificationsLeftPanelBase
+
+@if (IsPartLeftPanelVisible)
+{
+    @if (FullSize)
+    {
+        <div class="card" style="min-width: 350px; height: 85vh">
+            <div class="card-header">
+                <h6>
+                    <DxButton IconCssClass="@XafCustomComponents.Icons.FA.Solid.Minimize"
+                      Click="ToggleSize"
+                      RenderStyle="ButtonRenderStyle.None"
+                      RenderStyleMode="ButtonRenderStyleMode.Text"
+                      style="cursor:pointer;"
+                      title="Collapse" />
+                    Parts by Group
+                </h6>
+            </div>
+            <CascadingValue Value="@ListView" Name="View">
+                <FilterByMaterial />
+            </CascadingValue>
+            <CascadingValue Value="@ListView" Name="View">
+                <PartSpecificationsTabs />
+            </CascadingValue>           
+        </div>
+    }
+    else
+    {
+        <DxButton IconCssClass="@XafCustomComponents.Icons.FA.Solid.Maximize"
+          Click="ToggleSize"
+          RenderStyle="ButtonRenderStyle.None"
+          RenderStyleMode="ButtonRenderStyleMode.Text"
+          style="cursor:pointer;"
+          title="Expand" />
+    }
+}
+

@@ -1,0 +1,37 @@
+﻿@using GRPS_BLAZOR.Blazor.Server.Components.GroupTrees.PartGroupTree
+@using GRPS_BLAZOR.Blazor.Server.Components.GroupTrees.PartTypeTree
+@using GRPS_BLAZOR.Blazor.Server.Components.GroupTrees.PlasticAnalysisTree
+@inherits PartSpecificationsTabsBase
+
+<DxTabs>
+    <DxTabPage Text="Part Groups">
+        <div class="card" style="height: 350px">
+            <div class="card-header">
+                <h6>Group Name</h6>
+            </div>
+            <div style="overflow: auto;">
+                <PartGroupTree />
+            </div>
+        </div>
+    </DxTabPage>
+    <DxTabPage Text="Part Type">
+        <div class="card" style="height: 350px">
+            <div class="card-header">
+                <h6>Part Type Name</h6>
+            </div>
+            <div style="overflow: auto;">
+                <PartTypeTree />
+            </div>
+        </div>
+    </DxTabPage>
+    <DxTabPage Text="Plastic Analysis">
+         <div class="card" style="height: 350px">
+            <div class="card-header">
+                <h6>Pilot Category</h6>
+            </div>
+            <div style="overflow: auto;">
+                <PlasticAnalysisTree />
+            </div>
+        </div>
+    </DxTabPage>
+</DxTabs>

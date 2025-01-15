@@ -1,0 +1,45 @@
+﻿@using GRPS_BLAZOR.Blazor.Server.Components.GroupTrees.ProductGroupTree
+@using GRPS_BLAZOR.Blazor.Server.Components.GroupTrees.SupplierGroupTree
+@using XafCustomComponents
+@inherits GroupNameWrapperBase
+
+@if (IsProductGroupVisible || IsSupplierGroupVisible)
+{
+    @if (FullSize)
+    {
+        <div class="card h-100" style="min-width: 250px;">
+            <div class="card-header">
+                <h6>
+                    @if (ChangeSize)
+                    {
+                        <DxButton IconCssClass="@Icons.FA.Solid.Minimize"
+                      Click="ToggleSize"
+                      RenderStyle="ButtonRenderStyle.None"
+                      RenderStyleMode="ButtonRenderStyleMode.Text"
+                      style="cursor:pointer;"
+                      title="Collapse" />
+                    }
+                    @Text
+                </h6>
+            </div>
+            <div style="overflow: auto;">
+                @if (IsProductGroupVisible)
+                {
+                    <ProductGroupTree View="@ListView" />
+                }
+                @if (IsSupplierGroupVisible)
+                {
+                    <SupplierTree View="@ListView" />
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <DxButton IconCssClass="@Icons.FA.Solid.Maximize"
+          Click="ToggleSize"
+          RenderStyle="ButtonRenderStyle.None"
+          RenderStyleMode="ButtonRenderStyleMode.Text" style="cursor:pointer;"
+          title="Expand" />
+    }
+}

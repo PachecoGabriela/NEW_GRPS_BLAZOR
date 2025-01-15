@@ -1,0 +1,29 @@
+﻿@inherits FilterByMaterialBase
+
+@using GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema
+
+<div class="card">
+    <div class="card-header">
+        <h6>Filter by Material</h6>
+    </div>
+    <div class="p-2">
+        <div class="row">
+            <div class="col auto">
+                <DxCheckBox Checked="@FilterMaterial"
+                            CheckedChanged="@((bool value) => CheckedChanged(value))">
+                    Filter Material
+                </DxCheckBox>
+            </div>
+            <div class="col">
+                <DxComboBox Data=@Materials
+                            Value=@CurrentMaterial
+                            TextFieldName="@nameof(EnumInstance.Name)"
+                            ValueChanged=@((EnumInstance newValue) => SelectedMaterialChanged(newValue))
+                            ReadOnly="false"
+                            ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                            NullText="Select a Material">
+                </DxComboBox>
+            </div>
+        </div>
+    </div>
+</div>

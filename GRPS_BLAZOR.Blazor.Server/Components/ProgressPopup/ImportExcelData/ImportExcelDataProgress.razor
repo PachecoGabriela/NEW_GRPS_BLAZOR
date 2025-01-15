@@ -1,0 +1,19 @@
+﻿@using XafCustomComponents
+
+<DialogPopup>
+    <DialogContent>
+        <span class="text-muted">@ImportRecordsDetail</span>
+        <LinearProgressIndicator Worker="@Worker" ProgressChanged="@ProgressChangedHandler" />
+        <span class="text-muted">@ImportRecordsAdditionalDetails</span>
+    </DialogContent>
+    <DialogActions>
+        @if (Percentage < 100)
+        {
+            <DxButton Text="Cancel" RenderStyle="ButtonRenderStyle.Light" Click="@CancelClickedHandler"></DxButton>
+        }
+        else
+        {
+            <DxButton Text="OK" Click="@OkClickedHandler"></DxButton>
+        }
+    </DialogActions>
+</DialogPopup>

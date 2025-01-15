@@ -1,0 +1,119 @@
+﻿@using DevExpress.ExpressApp
+@using DevExpress.ExpressApp.Blazor
+@using DevExpress.ExpressApp.Blazor.Components
+@using DevExpress.ExpressApp.Blazor.Components.Models
+@using DevExpress.ExpressApp.Blazor.Services
+@using DevExpress.ExpressApp.Blazor.Templates
+@using DevExpress.ExpressApp.Utils
+@using GRPS_BLAZOR.Blazor.Server.Components.GroupTrees.GroupNameWrapper
+@using GRPS_BLAZOR.Blazor.Server.Components.GroupTrees.PartSpecificationsLeftPanel
+@using Microsoft.JSInterop
+@using XafCustomComponents
+
+@inherits FrameTemplateComponentBase<CustomApplicationWindowTemplate>
+@inject ILoadingIndicatorProvider LoadingIndicatorProvider
+
+<DialogProvider />
+
+<div id="main-window-template-component" class="app h-100 d-flex flex-column">
+    <SkipToMainContentLink/>
+    <ComponentModelObserver ComponentModel="@FrameTemplate.NavigateBackActionControl.ButtonModel">
+        <div role="banner" class="header d-flex flex-row shadow-sm navbar-dark flex-nowrap @DetailViewHeaderClass @NavigateBackActionHeaderClass">
+            <div class="header-left-side d-flex align-items-center ps-2">
+                <button class="btn-hamburger p-0 dxbl-btn dxbl-btn-standalone btn-secondary btn-header" data-visible-label="@HideNavigationBtnTitle" data-hidden-label="@ShowNavigationBtnTitle">
+                    <XafImage ImageName="Hamburger" Size="24" Styles="margin: auto;" />
+                </button>
+                <div class="header-logo mx-3"></div>
+            </div>
+            <div class="header-right-side w-100 overflow-hidden d-flex align-items-center px-2 px-sm-3">
+                @if(!FrameTemplate.IsTabbedMdi) {
+                    @FrameTemplate.NavigateBackActionControl.GetComponentContent();
+                }
+                <div role="heading" aria-level="1">
+                    <ViewCaptionComponent WindowCaption="@FrameTemplate" />
+                </div>
+                <SizeModeContainer>
+                    @FrameTemplate.HeaderToolbar.GetComponentContent()
+                </SizeModeContainer>
+                <div class="d-flex ms-auto">
+                    @FrameTemplate.AccountComponent.GetComponentContent()
+                    <SettingsComponent />
+                </div>
+            </div>
+        </div>
+    </ComponentModelObserver>
+    <XafErrorBoundary>
+        <div class="xaf-flex-auto overflow-hidden d-flex">
+            <div class="xaf-sidebar sidebar d-none d-sm-flex flex-column">
+                @FrameTemplate.ShowNavigationItemActionControl.GetComponentContent()
+                <div class="about-info mx-3 mb-4">
+                    @((MarkupString)FrameTemplate.AboutInfoString)
+                </div>
+            </div>
+            <div class="sidebar-sm-shadow"></div>
+            @if (FrameTemplate.IsTabbedMdi) {
+                @if (FrameTemplate.View is DashboardView || FrameTemplate.View is ListView)
+                {
+                    <div class="py-3 ps-3">
+                        <GroupNameWrapper View="@FrameTemplate.View" ChangeSize="true" Text="Group Name" />
+                    </div>
+                }
+
+                @if (FrameTemplate.View is DashboardView)
+                {
+                    <div class="py-3 ps-3">
+                        <PartSpecificationsLeftPanel View="@FrameTemplate.View" />
+                    </div>
+                }
+                <div role="main" class="w-100 overflow-auto">
+                    <SizeModeContainer>
+                        <ComponentModelObserver ComponentModel="@FrameTemplate.TabsModel">
+                            @FrameTemplate.TabsModel.GetComponentContent()
+                        </ComponentModelObserver>
+                    </SizeModeContainer>
+                </div>
+            }
+            else
+            {
+                @if (FrameTemplate.View is DashboardView || FrameTemplate.View is ListView)
+                {
+                    <div class="py-3 ps-3">
+                        <GroupNameWrapper View="@FrameTemplate.View" ChangeSize="true" Text="Group Name" />
+                    </div>
+                }
+
+                @if (FrameTemplate.View is DashboardView)
+                {
+                    <div class="py-3 ps-3">
+                        <PartSpecificationsLeftPanel View="@FrameTemplate.View" />
+                    </div>
+                }
+                <div id="main-view-content" role="main" class="main xaf-flex-auto overflow-hidden d-flex flex-column" tabindex="-1">
+                    <SizeModeContainer>
+                        <XafErrorBoundary>
+                            <div class="main-toolbar py-3 px-2 px-sm-3">@FrameTemplate.Toolbar.GetComponentContent()</div>
+                            <div class="main-content xaf-flex-auto overflow-auto pb-3 px-2 px-sm-3">
+                                <ViewSiteComponent ViewHolder="@FrameTemplate" />
+                            </div>
+                        </XafErrorBoundary>
+                    </SizeModeContainer>
+                </div>
+            }
+        </div>
+    </XafErrorBoundary>
+</div>
+
+@code {
+    public static RenderFragment Create(CustomApplicationWindowTemplate mainFormTemplate) => @<CustomApplicationWindowTemplateComponent FrameTemplate="@mainFormTemplate" />;
+    private string DetailViewHeaderClass => FrameTemplate.View is DetailView ? "xaf-detail-view-header" : default;
+    private string NavigateBackActionHeaderClass => FrameTemplate.NavigateBackActionControl.Visible ? "xaf-show-navigate-back-action" : default;
+    private string HideNavigationBtnTitle => CaptionHelper.GetLocalizedText("VisualComponents/Header", "HideNavigationPane");
+    private string ShowNavigationBtnTitle => CaptionHelper.GetLocalizedText("VisualComponents/Header", "ShowNavigationPane");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            await JSRuntime.InvokeVoidAsync("xaf.initApplicationWindowTemplate");
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

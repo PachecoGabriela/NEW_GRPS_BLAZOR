@@ -1,0 +1,10 @@
+﻿@*<DxComboBox />*@
+<h3>Test</h3>
+
+@code {
+    [Parameter]
+    public FindByFieldCriteriaModel ComponentModel { get; set; }
+
+    public static RenderFragment Create(FindByFieldCriteriaModel componentModel) =>
+    @<FindByFieldCriteriaRenderer ComponentModel="@componentModel" />;
+}

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="DevExpress.ExpressApp.Blazor" Version="24.2.3" />
+	  <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="24.2.3" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GRPS_BLAZOR.Module\GRPS_BLAZOR.Module.csproj" />
+  </ItemGroup>
+
+</Project>

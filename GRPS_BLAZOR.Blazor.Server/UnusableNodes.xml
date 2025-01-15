@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.BOMItem">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Quantity" EditMask="F4" DisplayFormat="{0:F4}" />
+      </OwnMembers>
+    </Class>
+    <Class Name="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="Quantity" EditMask="F4" DisplayFormat="{0:F4}" />
+        <Member Name="SAPQuantity" EditMask="F4" DisplayFormat="{0:F4}" />
+      </OwnMembers>
+    </Class>
+    <Class Name="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.Part">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="PartType" NullText="Unknown" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Views Id="Views">
+    <ListView Id="Product_ListView_Custom" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.Product">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ActiveBOM" PropertyName="ActiveBOM" Index="-1" />
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" />
+        <ColumnInfo Id="EANCode" PropertyName="EANCode" Index="-1" />
+        <ColumnInfo Id="Group" PropertyName="Group" Index="-1" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Index="-1" />
+        <ColumnInfo Id="IsImport" PropertyName="IsImport" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="SupplierProdCode" PropertyName="SupplierProdCode" Index="-1" />
+        <ColumnInfo Id="TUCCode" PropertyName="TUCCode" Index="-1" />
+        <ColumnInfo Id="UnitType" PropertyName="UnitType" Index="-1" />
+        <ColumnInfo Id="Code" PropertyName="Code" Index="0" SortIndex="0" SortOrder="Ascending" Caption="Product Code" Width="160" />
+        <ColumnInfo Id="Name" PropertyName="Name" SortIndex="-1" SortOrder="None" Index="1" Caption="Product Name" Width="295" />
+        <ColumnInfo Id="Description" PropertyName="Description" Index="2" SortIndex="-1" SortOrder="None" Caption="Product Description" />
+        <ColumnInfo Id="HasBOM" PropertyName="HasBOM" Index="3" Width="79" />
+        <ColumnInfo Id="Supplier" PropertyName="Supplier" Index="4" Caption="Supplier Name" />
+        <ColumnInfo Id="OwnBrandName" PropertyName="OwnBrandName" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="Part_ListView_Custom" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.Part" PageSize="100">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="ParentComponent" PropertyName="ParentComponent" Index="-1" />
+        <ColumnInfo Id="PartGroup" PropertyName="PartGroup" Index="-1" />
+        <ColumnInfo Id="Code" PropertyName="Code" View="" Index="0" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="Name" PropertyName="Name" SortIndex="-1" SortOrder="None" Index="1" Width="167" />
+        <ColumnInfo Id="Description" PropertyName="Description" Index="2" Width="100" />
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="3" Width="103" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="4" Width="86" />
+        <ColumnInfo Id="PartType" PropertyName="PartType" Index="5" Width="86" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackWeight_ListView_ProductDashboard_Second" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight">
+      <Columns Id="Columns">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="-1" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="0" Caption="Level" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="1" Caption="Type" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="2" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="3" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="4" Caption="SAP Qty" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackWeight_ListView_PartDashboard" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight">
+      <Columns Id="Columns">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="-1" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="-1" Caption="Type" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="-1" Caption="SAP Qty" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="0" Caption="Type" Width="269" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="1" Width="328" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="2" Width="268" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="3" Width="110" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackWeight_ListView_Custom_ProductDashboard" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight">
+      <Columns Id="Columns">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="0" Caption="Part Code" MaxLength="110" Width="150" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="1" Caption="Part Name" Width="200" MaxLength="120" />
+        <ColumnInfo Id="Part.Description" PropertyName="Part.Description" Index="2" MaxLength="80" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="3" MaxLength="80" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="4" Caption="Pack Level" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="5" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="6" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="7" Caption="Weight" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="8" Caption="SAP Weight" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="9" Caption="Unit" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackWeight_ListView_Custom" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight">
+      <Columns Id="Columns">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="0" Caption="Part Code" MaxLength="110" Width="150" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="1" Caption="Part Name" Width="200" MaxLength="120" />
+        <ColumnInfo Id="Part.Description" PropertyName="Part.Description" Index="2" MaxLength="80" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="3" MaxLength="80" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="4" Caption="Pack Level" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="5" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="6" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="7" Caption="Weight" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="8" Caption="SAP Weight" EditMask="C" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="9" Caption="Unit" />
+      </Columns>
+    </ListView>
+    <ListView Id="BOMItem_ListView_Custom_ProductDashboard" PageSize="100" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.BOMItem">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="-1" />
+        <ColumnInfo Id="BOM" PropertyName="BOM" Index="-1" />
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" />
+        <ColumnInfo Id="BOM.AssemblyCode" PropertyName="BOM.AssemblyCode" Index="0" />
+        <ColumnInfo Id="BOM.Product.Code" PropertyName="BOM.Product.Code" Index="1" Caption="Product Code" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="2" Caption="Part Code" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="3" Caption="Part Name" />
+        <ColumnInfo Id="Source" PropertyName="Source" Index="4" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="BOMItem_ListView_Custom" PageSize="100" ClassName="GRIPS.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.BOMItem">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="-1" />
+        <ColumnInfo Id="BOM" PropertyName="BOM" Index="-1" />
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" />
+        <ColumnInfo Id="BOM.AssemblyCode" PropertyName="BOM.AssemblyCode" Index="0" />
+        <ColumnInfo Id="BOM.Product.Code" PropertyName="BOM.Product.Code" Index="1" Caption="Product Code" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="2" Caption="Part Code" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="3" Caption="Part Name" />
+        <ColumnInfo Id="Source" PropertyName="Source" Index="4" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="5" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="BillofMaterials_Dashboard">
+      <Items Id="Items">
+        <DashboardViewItem Id="PackWeight_ListView_Custom_DashboardItem" ViewId="PackWeight_ListView_Custom" />
+        <DashboardViewItem Id="BOMItem_ListView_DashboardItem" ViewId="BOMItem_ListView_Custom" />
+      </Items>
+    </DashboardView>
+    <DetailView Id="ApplicationUser_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PermissionPolicyUser">
+              <LayoutItem Id="Photo" ViewItem="Photo" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="BOM_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="PackWeight">
+              <LayoutItem Id="PackWeight" ViewItem="PackWeight" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Supplier_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Supplier_col2">
+              <LayoutItem Id="Company" ViewItem="Company" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

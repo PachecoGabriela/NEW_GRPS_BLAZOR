@@ -1,0 +1,850 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <ActionToContainerMapping>
+      <ActionContainer Id="Edit">
+        <ActionLink ActionId="Edit" Index="0" IsNewNode="True" />
+        <ActionLink ActionId="Edit2" Index="0" />
+        <ActionLink ActionId="Delete" Index="1" />
+        <ActionLink ActionId="Export" Index="5" IsNewNode="True" />
+      </ActionContainer>
+      <ActionContainer Id="Export">
+        <ActionLink ActionId="Export" Removed="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <NavigationItems>
+    <Items>
+      <Item Id="Calculations">
+        <Items>
+          <Item Id="TotalPackWeight_ListView" ImageName="CalculationOptions" />
+        </Items>
+      </Item>
+      <Item Id="Default" Caption="Security System" />
+      <Item Id="Grips Desktop">
+        <Items>
+          <Item Id="ProductsDashboard" Caption="Products" ViewId="Products_Dashboard" Index="0" ImageName="ProductQuickShippments" IsNewNode="True" />
+          <Item Id="Supplier_ListView" Caption="Suppliers" Index="1" ImageName="BO_Vendor" />
+          <Item Id="Customer_ListView" Index="2" Caption="Customers" ImageName="NewCustomer" />
+          <Item Id="PartSpecificationsDashboard" Caption="Part Specifications" ViewId="PartSpecifications_Dashboard" ImageName="BO_Price_Item" Index="3" IsNewNode="True" />
+          <Item Id="BillofMaterials" Index="4" Caption="Bill of Materials" ViewId="BillofMaterials_Dashboard" ImageName="BO_Order_Item" IsNewNode="True" />
+          <Item Id="SalesVolume_ListView" Caption="Sales" Index="5" ImageName="BO_Sale" />
+          <Item Id="ComplianceRule_ListView" Caption="Rules" Index="6" ImageName="BO_Task" />
+        </Items>
+      </Item>
+      <Item Id="Import Tool">
+        <Items>
+          <Item Id="ImportLog_ListView" ImageName="BO_Contract" />
+        </Items>
+      </Item>
+      <Item Id="Reports">
+        <Items>
+          <Item Id="Dashboards" Visible="False" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options UIType="SingleWindowSDI" RestoreTabbedMdiLayout="True" ShowTabImage="True" />
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="24.2.3.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="24.2.3.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
+    <DetailView Id="ApplicationUser_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="17.373737373737374">
+            <LayoutGroup Id="PermissionPolicyUser" Direction="Horizontal" RelativeSize="100" Caption="PermissionPolicyUser" Index="0">
+              <LayoutGroup Id="Auto928758e5-fe5f-4d62-b181-17ca47316aa4" ShowCaption="False" Caption="" Index="0" RelativeSize="76.34543178973718" IsNewNode="True">
+                <LayoutItem Id="UserName" ViewItem="UserName" Index="0" RelativeSize="37.2093023255814" IsNewNode="True" />
+                <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="27.906976744186046" IsNewNode="True" />
+                <LayoutItem Id="ChangePasswordOnFirstLogon" ViewItem="ChangePasswordOnFirstLogon" Index="2" RelativeSize="34.883720930232556" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Photo" ViewItem="Photo" Index="1" RelativeSize="23.654568210262827" ShowCaption="False" IsNewNode="True" />
+              <LayoutItem Id="ChangePasswordOnFirstLogon" Removed="True" />
+              <LayoutItem Id="IsActive" Removed="True" />
+              <LayoutItem Id="UserName" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ApplicationUser" Caption="Photo" RelativeSize="27.586206896551722" Removed="True">
+              <LayoutItem Id="Photo" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Roles_Group" Direction="Vertical" RelativeSize="82.62626262626263">
+            <LayoutItem Id="Roles" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DashboardView Id="BillofMaterials_Dashboard" Caption="Bill of Materials" IsNewNode="True">
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Caption="Main(1)" Index="0" RelativeSize="53.72945638432364" IsNewNode="True">
+          <LayoutItem Id="BOMItem_ListView_DashboardItem" Index="0" RelativeSize="100" ViewItem="BOMItem_ListView_DashboardItem" IsNewNode="True" />
+        </LayoutGroup>
+        <LayoutItem Id="Part_ListView_Custom_DashboardItem" Index="1" RelativeSize="46.27054361567636" ViewItem="PackWeight_ListView_Custom_DashboardItem" IsNewNode="True" />
+      </Layout>
+    </DashboardView>
+    <ListView Id="BOM_ChangeHistory_ListView">
+      <Columns>
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="BOM_DetailView">
+      <Items>
+        <PropertyEditor Id="ProductWeight.UnitOfMeas" PropertyName="ProductWeight.UnitOfMeas" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="43.003412969283275">
+            <LayoutGroup Id="BOM_col1" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="Auto165fd2e4-55e5-4705-b1c5-2ff534283ce3" ShowCaption="False" Caption="Auto165fd2e4-55e5-4705-b1c5-2ff534283ce3(4)" Direction="Horizontal" Index="0" RelativeSize="14.682539682539682" IsNewNode="True">
+                <LayoutItem Id="Oid" ViewItem="Oid" CaptionLocation="Left" Index="0" RelativeSize="49.92784992784993" IsNewNode="True" />
+                <LayoutItem Id="Code" ViewItem="Code" CaptionLocation="Left" Index="1" RelativeSize="50.07215007215007" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autoc5a5c8df-cc03-4bfd-8169-24bbebb4154c" ShowCaption="False" Caption="Autoc5a5c8df-cc03-4bfd-8169-24bbebb4154c(7)" Index="1" RelativeSize="85.31746031746032" IsNewNode="True">
+                <LayoutItem Id="Name" ViewItem="Name" CaptionLocation="Left" Index="0" RelativeSize="13.488372093023257" IsNewNode="True" />
+                <LayoutItem Id="Description" ViewItem="Description" CaptionLocation="Left" Index="1" RelativeSize="12.093023255813954" IsNewNode="True" />
+                <LayoutGroup Id="Auto5da0c6b6-1c27-4d5a-bc83-834eb31429c5" ShowCaption="False" Caption="Auto5da0c6b6-1c27-4d5a-bc83-834eb31429c5(10)" Direction="Horizontal" Index="2" RelativeSize="16.27906976744186" IsNewNode="True">
+                  <LayoutItem Id="ProductWeight" ViewItem="ProductWeight" CaptionLocation="Left" Index="0" RelativeSize="49.92784992784993" IsNewNode="True" />
+                  <LayoutItem Id="ProductWeight.UnitOfMeas" ShowCaption="False" ViewItem="ProductWeight.UnitOfMeas" SizeConstraintsType="Custom" MinSize="173, 26" Index="1" RelativeSize="50.07215007215007" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto84d2e972-6cbb-4b03-af69-fd6c6251bdf9" ShowCaption="False" Caption="Auto84d2e972-6cbb-4b03-af69-fd6c6251bdf9(13)" Index="3" RelativeSize="58.13953488372093" IsNewNode="True">
+                  <LayoutGroup Id="Auto24fab13d-95a6-4398-b745-2bd33da490b0" ShowCaption="False" Caption="Auto24fab13d-95a6-4398-b745-2bd33da490b0(10)" Direction="Horizontal" Index="0" RelativeSize="30.4" IsNewNode="True">
+                    <LayoutItem Id="IsAssembly" ViewItem="IsAssembly" CaptionLocation="Left" SizeConstraintsType="Custom" MinSize="173, 38" Index="0" RelativeSize="27.128427128427127" IsNewNode="True" />
+                    <LayoutItem Id="AssemblyCode" ViewItem="AssemblyCode" CaptionLocation="Left" Index="1" RelativeSize="72.87157287157287" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutItem Id="Product" ViewItem="Product" CaptionLocation="Left" Index="1" RelativeSize="20.8" IsNewNode="True" />
+                  <LayoutGroup Id="Auto08487a87-ecf1-4656-9ba5-bd43077991fe" ShowCaption="False" Caption="Auto08487a87-ecf1-4656-9ba5-bd43077991fe(18)" Direction="Vertical" Index="2" RelativeSize="48.8" IsNewNode="True">
+                    <LayoutGroup Id="Auto2713b57f-2e7a-42bf-a900-7f291fc6f0a9" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="52.459016393442624" IsNewNode="True">
+                      <LayoutItem Id="ActiveFrom" ViewItem="ActiveFrom" CaptionLocation="Left" Index="0" RelativeSize="49.92784992784993" IsNewNode="True" />
+                      <LayoutItem Id="ActiveTo" ViewItem="ActiveTo" CaptionLocation="Left" Index="1" RelativeSize="50.07215007215007" IsNewNode="True" />
+                    </LayoutGroup>
+                    <LayoutItem Id="Item1" Index="1" RelativeSize="47.540983606557376" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="GRIPSObject" Index="2" RelativeSize="11.764705882352942" Caption="Code" Removed="True">
+              <LayoutItem Id="Code" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="BOM" RelativeSize="100" Direction="Vertical" Removed="True">
+              <LayoutGroup Id="BOM_col1" RelativeSize="100">
+                <LayoutItem Id="Oid" Index="0" RelativeSize="20" ViewItem="Oid" IsNewNode="True" />
+                <LayoutItem Id="Name" Index="1" RelativeSize="15" />
+                <LayoutItem Id="Description" Index="2" RelativeSize="15" />
+                <LayoutItem Id="ProductWeight" Index="3" RelativeSize="15" />
+                <LayoutGroup Id="Auto24fab13d-95a6-4398-b745-2bd33da490b0" ShowCaption="False" Caption="" Direction="Horizontal" Index="4" RelativeSize="15" IsNewNode="True">
+                  <LayoutItem Id="IsAssembly" Index="0" RelativeSize="50" ViewItem="IsAssembly" IsNewNode="True" />
+                  <LayoutItem Id="AssemblyCode" Index="1" RelativeSize="50" ViewItem="AssemblyCode" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="Product" Index="5" RelativeSize="20" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" RelativeSize="27.659574468085108" Caption="Oid" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="56.996587030716725">
+            <LayoutGroup Id="BOMItems" RelativeSize="100">
+              <LayoutItem Id="BOMItems" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Products" RelativeSize="100">
+              <LayoutItem Id="Products" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ProdWeights" RelativeSize="100" Index="2">
+              <LayoutItem Id="ProdWeights" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesVolumes" RelativeSize="100" Index="3">
+              <LayoutItem Id="SalesVolumes" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="PackWeight" Caption="Pack Weight" Index="4" ShowCaption="True" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="PackWeight" ViewItem="PackWeight" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ChangeHistory" RelativeSize="100" Index="5">
+              <LayoutItem Id="ChangeHistory" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="BOM_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Company" Index="-1" />
+        <ColumnInfo Id="AssemblyCode" Index="0" />
+        <ColumnInfo Id="Code" Index="1" />
+        <ColumnInfo Id="Name" Index="2" />
+        <ColumnInfo Id="Description" Index="3" />
+        <ColumnInfo Id="Product" Index="4" />
+        <ColumnInfo Id="ProductWeight" Index="5" />
+        <ColumnInfo Id="IsAssembly" Index="6" />
+      </Columns>
+    </ListView>
+    <ListView Id="BOMItem_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="BOM" Index="-1" />
+        <ColumnInfo Id="Company" Index="-1" />
+        <ColumnInfo Id="Part" Index="-1" />
+        <ColumnInfo Id="BOM.AssemblyCode" PropertyName="BOM.AssemblyCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="BOM.Product.Code" PropertyName="BOM.Product.Code" Index="1" Caption="Product Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="2" Caption="Part Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="3" Caption="Part Name" IsNewNode="True" />
+        <ColumnInfo Id="Source" Index="4" />
+        <ColumnInfo Id="Quantity" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ComplianceRule_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="75.50607287449392">
+            <LayoutGroup Id="ComplianceRule" RelativeSize="89.81233243967829" Direction="Vertical">
+              <LayoutGroup Id="ComplianceRule_col1" RelativeSize="51.324503311258276">
+                <LayoutItem Id="Oid" Index="0" RelativeSize="20.64516129032258" ViewItem="Oid" IsNewNode="True" />
+                <LayoutItem Id="ActiveFrom" RelativeSize="15.483870967741936" Index="1" />
+                <LayoutItem Id="TemplateName" Index="2" RelativeSize="15.483870967741936" ViewItem="TemplateName" IsNewNode="True" />
+                <LayoutItem Id="ActiveTo" Index="3" RelativeSize="15.483870967741936" />
+                <LayoutItem Id="IsTemplate" Index="4" RelativeSize="15.483870967741936" ViewItem="IsTemplate" IsNewNode="True" />
+                <LayoutItem Id="Description" Index="5" RelativeSize="17.419354838709676" />
+                <LayoutItem Id="CriteriaRule" RelativeSize="17.877094972067038" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ComplianceRule_col2" RelativeSize="48.675496688741724">
+                <LayoutItem Id="Name" RelativeSize="18.367346938775512" />
+                <LayoutItem Id="TemplateName" RelativeSize="24.489795918367346" />
+                <LayoutItem Id="IsTemplate" RelativeSize="35.374149659863946" />
+                <LayoutItem Id="Company" RelativeSize="21.768707482993197" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="1" RelativeSize="10.187667560321715">
+              <LayoutItem Id="Oid" RelativeSize="100" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="24.493927125506072">
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="0" Caption="Criteria" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="CriteriaRule" ViewItem="CriteriaRule" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="AustriaReturnCells" RelativeSize="100" Index="1">
+              <LayoutItem Id="AustriaReturnCells" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="IDASPackTotals" Index="2" RelativeSize="100">
+              <LayoutItem Id="IDASPackTotals" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="UKReturnCells" RelativeSize="100" Index="3">
+              <LayoutItem Id="UKReturnCells" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="CanadaReturnCells" RelativeSize="100" Index="4">
+              <LayoutItem Id="CanadaReturnCells" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="IDASReturnCells" Index="5" RelativeSize="100">
+              <LayoutItem Id="IDASReturnCells" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="RepakReturnCells" Index="6" RelativeSize="100">
+              <LayoutItem Id="RepakReturnCells" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesVolumes" Index="7" RelativeSize="100">
+              <LayoutItem Id="SalesVolumes" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="TotalPackWeights" Index="8" RelativeSize="100">
+              <LayoutItem Id="TotalPackWeights" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ComplianceRule_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Company" Index="-1" />
+        <ColumnInfo Id="TemplateName" Index="2" />
+        <ColumnInfo Id="IsTemplate" Index="3" />
+      </Columns>
+    </ListView>
+    <ListView Id="Customer_ChangeHistory_ListView">
+      <Columns>
+        <ColumnInfo Id="ModifiedOn" DisplayFormat="{0:G}" />
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="Customer_CustomerCons_ListView" Caption="Customer Contact" />
+    <DetailView Id="Customer_DetailView">
+      <Items>
+        <PropertyEditor Id="CustomerCons" Caption="Customer Contacts" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="34.16815742397138">
+            <LayoutGroup Id="Customer_col1" ShowCaption="False" Index="0" RelativeSize="63.35078534031414" IsNewNode="True">
+              <LayoutGroup Id="Autoea059d58-ced1-49df-b3cd-09e29499a804" ShowCaption="False" Caption="Autoea059d58-ced1-49df-b3cd-09e29499a804(5)" Direction="Horizontal" Index="0" RelativeSize="33.05785123966942" IsNewNode="True">
+                <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="49.85590778097983" CaptionLocation="Left" IsNewNode="True" />
+                <LayoutItem Id="Code" ViewItem="Code" Index="1" RelativeSize="50.14409221902017" CaptionLocation="Left" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Name" ViewItem="Name" Index="1" RelativeSize="21.487603305785125" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Group" ViewItem="Group" Index="2" RelativeSize="21.487603305785125" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="PartyType" ViewItem="PartyType" Index="3" RelativeSize="23.96694214876033" CaptionLocation="Left" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Customer_col2" ShowCaption="False" Index="1" RelativeSize="36.64921465968586" IsNewNode="True">
+              <LayoutGroup Id="Item1" ShowCaption="False" CaptionLocation="Top" Direction="Vertical" Index="0" RelativeSize="54.285714285714285" Caption="Item1" IsNewNode="True">
+                <LayoutGroup Id="Item2" ShowCaption="False" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Item2" Direction="Horizontal" IsNewNode="True">
+                  <LayoutItem Id="ActiveFrom" ViewItem="ActiveFrom" CaptionLocation="Left" Index="0" RelativeSize="51.00864553314121" IsNewNode="True" />
+                  <LayoutItem Id="ActiveTo" ViewItem="ActiveTo" CaptionLocation="Left" Index="1" RelativeSize="48.99135446685879" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="Type" ViewItem="Type" Index="1" RelativeSize="45.714285714285715" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="GRIPSObject" Index="2" RelativeSize="20.699708454810494" Caption="Code" Removed="True">
+              <LayoutItem Id="Code" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" RelativeSize="35.8600583090379" Caption="Oid" Index="2" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Customer" RelativeSize="100" Direction="Vertical" Removed="True">
+              <LayoutGroup Id="Customer_col1" RelativeSize="100">
+                <LayoutGroup Id="Autoea059d58-ced1-49df-b3cd-09e29499a804" ShowCaption="False" Caption="Autoea059d58-ced1-49df-b3cd-09e29499a804(5)" Direction="Horizontal" Index="0" RelativeSize="32.20338983050848" IsNewNode="True">
+                  <LayoutItem Id="Oid" Index="0" RelativeSize="49.91150442477876" ViewItem="Oid" IsNewNode="True" />
+                  <LayoutItem Id="Code" Index="1" RelativeSize="50.08849557522124" ViewItem="Code" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="Name" RelativeSize="20.338983050847457" Index="1" />
+                <LayoutItem Id="Group" Index="2" RelativeSize="20.338983050847457" />
+                <LayoutItem Id="PartyType" Index="3" RelativeSize="27.11864406779661" ViewItem="PartyType" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="65.83184257602862">
+            <LayoutGroup Id="CustomerAddresses" RelativeSize="100" Caption="Addresses">
+              <LayoutItem Id="CustomerAddresses" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="CustomerCons" RelativeSize="100" Caption="Contacts">
+              <LayoutItem Id="CustomerCons" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ChangeHistory" RelativeSize="100">
+              <LayoutItem Id="ChangeHistory" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Customer_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Group" Index="-1" />
+        <ColumnInfo Id="PartyCode" Index="-1" />
+        <ColumnInfo Id="Type" Index="-1" />
+        <ColumnInfo Id="Code" Index="0" />
+        <ColumnInfo Id="Name" Index="1" />
+        <ColumnInfo Id="PartyType" Index="2" />
+      </Columns>
+    </ListView>
+    <DetailView Id="CustomerAddress_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Direction="Vertical">
+            <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="4.651162790697675" CaptionLocation="Left" IsNewNode="True" />
+            <LayoutGroup Id="CustomerAddress_col1" ShowCaption="False" Index="1" RelativeSize="95.34883720930233" IsNewNode="True">
+              <LayoutItem Id="Address1" ViewItem="Address1" Index="0" RelativeSize="4.512195121951219" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address2" ViewItem="Address2" Index="1" RelativeSize="3.4146341463414633" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address3" ViewItem="Address3" Index="2" RelativeSize="3.4146341463414633" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address4" ViewItem="Address4" Index="3" RelativeSize="3.4146341463414633" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address5" ViewItem="Address5" Index="4" RelativeSize="3.4146341463414633" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="PostCode" ViewItem="PostCode" Index="5" RelativeSize="81.82926829268293" CaptionLocation="Left" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="CustomerAddress" Removed="True" />
+            <LayoutGroup Id="XPObject" RelativeSize="78.35420393559929" Caption="Oid" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="CustomerCon_DetailView" Caption="Customer Contact">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="XPObject" RelativeSize="100" Caption="Oid" Index="0">
+              <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="6.093189964157706" CaptionLocation="Left" IsNewNode="True" Removed="True" />
+              <LayoutItem Id="ContactName" ViewItem="ContactName" Index="1" RelativeSize="4.659498207885305" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Phone" ViewItem="Phone" Index="2" RelativeSize="4.659498207885305" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Fax" ViewItem="Fax" Index="3" RelativeSize="4.659498207885305" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Email" ViewItem="Email" Index="4" RelativeSize="4.659498207885305" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Web" ViewItem="Web" Index="5" RelativeSize="75.26881720430107" CaptionLocation="Left" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="CustomerCon" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PackWeight_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <TabbedGroup Id="Item1" CaptionLocation="Top" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="PackWeight" ShowCaption="True" Caption="Pack Weight" Direction="Vertical" Index="0" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="6.896551724137931" CaptionLocation="Left" IsNewNode="True" />
+                <LayoutGroup Id="PackWeight_col1" ShowCaption="False" Index="1" RelativeSize="27.586206896551722" IsNewNode="True">
+                  <LayoutItem Id="Type" ViewItem="Type" Index="0" RelativeSize="23.529411764705884" CaptionLocation="Left" IsNewNode="True" />
+                  <LayoutGroup Id="Item12" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="76.47058823529412" Caption="Material" IsNewNode="True">
+                    <LayoutItem Id="Material" ViewItem="Material" Index="0" RelativeSize="50" CaptionLocation="Left" IsNewNode="True" />
+                    <LayoutItem Id="MaterialCategory" ViewItem="MaterialCategory" Index="1" RelativeSize="50" CaptionLocation="Left" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+                <LayoutGroup Id="Item11" ShowCaption="True" Caption="Weight" CaptionLocation="Top" Index="2" RelativeSize="65.51724137931035" IsNewNode="True">
+                  <LayoutGroup Id="Auto9bbd0080-6c60-419b-bb81-97a4b495a150" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="11.929824561403509" IsNewNode="True">
+                    <LayoutItem Id="Quantity" ViewItem="Quantity" CaptionLocation="Left" Index="0" RelativeSize="50" IsNewNode="True" />
+                    <LayoutItem Id="UnitOfMeas" ShowCaption="False" ViewItem="UnitOfMeas" Index="1" RelativeSize="50" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutItem Id="SAPQuantity" ViewItem="SAPQuantity" Index="1" RelativeSize="88.0701754385965" CaptionLocation="Left" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="1" Caption="Recycling Info" RelativeSize="100" IsNewNode="True">
+                <LayoutGroup Id="Auto8a77cf92-d55a-4bed-bf55-dfadcbb84060" ShowCaption="False" Caption="Auto8a77cf92-d55a-4bed-bf55-dfadcbb84060(22)" Direction="Horizontal" Index="0" RelativeSize="27.99188640973631" IsNewNode="True">
+                  <LayoutGroup Id="Item3" ShowCaption="True" Caption="Recycled Content" CaptionLocation="Top" Index="0" RelativeSize="49.107142857142854" IsNewNode="True">
+                    <LayoutItem Id="MinRecCon" ViewItem="MinRecCon" CaptionLocation="Left" Index="0" RelativeSize="36.170212765957444" IsNewNode="True" />
+                    <LayoutItem Id="MaxRecCon" ViewItem="MaxRecCon" CaptionLocation="Left" Index="1" RelativeSize="27.659574468085108" IsNewNode="True" />
+                    <LayoutItem Id="AvgRecCon" ViewItem="AvgRecCon" CaptionLocation="Left" Index="2" RelativeSize="36.170212765957444" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Item4" ShowCaption="True" Caption="Post Consumer" CaptionLocation="Top" Index="1" RelativeSize="50.892857142857146" IsNewNode="True">
+                    <LayoutItem Id="MinPostCon" ViewItem="MinPostCon" CaptionLocation="Left" Index="0" RelativeSize="36.170212765957444" IsNewNode="True" />
+                    <LayoutItem Id="MaxPostCon" ViewItem="MaxPostCon" CaptionLocation="Left" Index="1" RelativeSize="27.659574468085108" IsNewNode="True" />
+                    <LayoutItem Id="AvgPostCon" ViewItem="AvgPostCon" CaptionLocation="Left" Index="2" RelativeSize="36.170212765957444" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+                <LayoutGroup Id="Item5" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="72.00811359026369" Caption="General" IsNewNode="True">
+                  <LayoutItem Id="MaterialRecyclable" ViewItem="MaterialRecyclable" Index="0" RelativeSize="10.725552050473187" CaptionLocation="Left" IsNewNode="True" />
+                  <LayoutItem Id="Refillable" ViewItem="Refillable" Index="1" RelativeSize="8.201892744479496" CaptionLocation="Left" IsNewNode="True" />
+                  <LayoutItem Id="BioDegrad" ViewItem="BioDegrad" Index="2" RelativeSize="8.201892744479496" CaptionLocation="Left" IsNewNode="True" />
+                  <LayoutItem Id="OnPackSustMsg" ViewItem="OnPackSustMsg" Index="3" RelativeSize="8.201892744479496" CaptionLocation="Left" IsNewNode="True" />
+                  <LayoutItem Id="Colour" ViewItem="Colour" Index="4" RelativeSize="64.66876971608833" CaptionLocation="Left" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item6" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="2" Caption="Compliance" RelativeSize="100" IsNewNode="True">
+                <LayoutGroup Id="Item7" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="21.50101419878296" Caption="Metals" IsNewNode="True">
+                  <LayoutItem Id="HeavyMetalComp" ViewItem="HeavyMetalComp" Index="0" RelativeSize="50" CaptionLocation="Left" IsNewNode="True" />
+                  <LayoutItem Id="ConflictMetalComp" ViewItem="ConflictMetalComp" Index="1" RelativeSize="50" CaptionLocation="Left" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Item8" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="78.49898580121703" Caption="Forestry" IsNewNode="True">
+                  <LayoutItem Id="ForestryCertified" ViewItem="ForestryCertified" Index="0" RelativeSize="100" CaptionLocation="Left" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item9" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="3" Caption="Source" RelativeSize="100" IsNewNode="True">
+                <LayoutGroup Id="Item10" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Place of" IsNewNode="True">
+                  <LayoutItem Id="PlacePackFill" ViewItem="PlacePackFill" Index="0" RelativeSize="7.34341252699784" CaptionLocation="Left" IsNewNode="True" />
+                  <LayoutItem Id="PlaceManufac" ViewItem="PlaceManufac" Index="1" RelativeSize="92.65658747300216" CaptionLocation="Left" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </TabbedGroup>
+            <LayoutGroup Id="PackWeight" Removed="True" />
+            <LayoutGroup Id="XPObject" RelativeSize="41.391941391941394" Caption="Oid" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Part_BOMItems_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="BOM" Index="-1" />
+        <ColumnInfo Id="Company" Index="-1" />
+        <ColumnInfo Id="BOM.Product.Code" PropertyName="BOM.Product.Code" Index="0" Caption="Product Code" IsNewNode="True" />
+        <ColumnInfo Id="BOM.Product.Name" PropertyName="BOM.Product.Name" Index="1" Caption="Product Name" IsNewNode="True" />
+        <ColumnInfo Id="Source" Index="2" />
+        <ColumnInfo Id="Quantity" Index="3" />
+      </Columns>
+    </ListView>
+    <ListView Id="Part_ChangeHistory_ListView">
+      <Columns>
+        <ColumnInfo Id="ModifiedOn" DisplayFormat="{0:G}" />
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Part_DetailView">
+      <Items>
+        <PropertyEditor Id="ActiveFrom" LookupProperty="" />
+        <PropertyEditor Id="ActiveFrom.StartDate" PropertyName="ActiveFrom.StartDate" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="28.805620608899297">
+            <LayoutGroup Id="Part_col1" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="16.260162601626018" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Code" ViewItem="Code" Index="1" RelativeSize="11.382113821138212" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Name" ViewItem="Name" Index="2" RelativeSize="11.382113821138212" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Description" ViewItem="Description" Index="3" RelativeSize="11.382113821138212" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="PartGroup" ViewItem="PartGroup" Index="4" RelativeSize="11.382113821138212" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="PartType" ViewItem="PartType" Index="5" RelativeSize="11.382113821138212" CaptionLocation="Left" SizeConstraintsType="Default" MinSize="197, 26" IsNewNode="True" />
+              <LayoutGroup Id="Auto0be999b9-abb6-424e-95d9-33327ee6d07e" ShowCaption="False" Caption="Auto0be999b9-abb6-424e-95d9-33327ee6d07e(10)" Direction="Horizontal" Index="6" RelativeSize="26.829268292682926" IsNewNode="True">
+                <LayoutItem Id="ActiveFrom" ViewItem="ActiveFrom" Index="0" RelativeSize="44.04761904761905" CaptionLocation="Top" IsNewNode="True" />
+                <LayoutItem Id="ActiveTo" ViewItem="ActiveTo" CaptionLocation="Top" Index="1" RelativeSize="55.95238095238095" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="GRIPSObject" Index="2" RelativeSize="14.325068870523417" Caption="Code" Removed="True">
+              <LayoutItem Id="Code" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" RelativeSize="30.02754820936639" Caption="Oid" Index="2" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Part" RelativeSize="100" Direction="Vertical" Removed="True">
+              <LayoutGroup Id="Part_col1" RelativeSize="100">
+                <LayoutItem Id="Oid" Index="0" RelativeSize="20" ViewItem="Oid" IsNewNode="True" />
+                <LayoutItem Id="Code" Index="1" RelativeSize="15" ViewItem="Code" IsNewNode="True" />
+                <LayoutItem Id="Name" Index="2" RelativeSize="15" />
+                <LayoutItem Id="Description" Index="3" RelativeSize="15" />
+                <LayoutItem Id="PartGroup" Index="4" RelativeSize="15" ViewItem="PartGroup" IsNewNode="True" />
+                <LayoutItem Id="PartType" Index="5" RelativeSize="20" ViewItem="PartType" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="71.1943793911007">
+            <LayoutGroup Id="PackWeights" RelativeSize="100" Index="0">
+              <LayoutItem Id="PackWeights" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="SRAttributes" RelativeSize="100" Index="1">
+              <LayoutItem Id="SRAttributes" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Dimensions" RelativeSize="100" Index="2">
+              <LayoutItem Id="Dimensions" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="3" Caption="Used By BOM" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="BOMItems" Index="0" RelativeSize="100" ViewItem="BOMItems" ShowCaption="False" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="PackagingWeights" Index="3" RelativeSize="100" Removed="True">
+              <LayoutItem Id="PackagingWeights" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ChangeHistory" Index="4" RelativeSize="100">
+              <LayoutItem Id="ChangeHistory" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ProdWeights" Index="5" RelativeSize="100" Removed="True">
+              <LayoutItem Id="ProdWeights" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="PartCollection" Index="7" RelativeSize="100" Removed="True">
+              <LayoutItem Id="PartCollection" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="BOMItems" RelativeSize="100" Removed="True">
+              <LayoutItem Id="BOMItems" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Part_Dimensions_ListView">
+      <Columns>
+        <ColumnInfo Id="Quantity" Index="-1" />
+        <ColumnInfo Id="Type" Index="0" />
+        <ColumnInfo Id="Length" Index="1" />
+        <ColumnInfo Id="Width" Index="2" />
+        <ColumnInfo Id="Height" Index="3" />
+        <ColumnInfo Id="UnitOfMeas" Index="4" />
+      </Columns>
+    </ListView>
+    <ListView Id="Part_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Company" Index="-1" />
+        <ColumnInfo Id="ParentComponent" Index="-1" />
+        <ColumnInfo Id="PartGroup" Index="-1" />
+        <ColumnInfo Id="Code" Index="0" />
+        <ColumnInfo Id="Name" Index="1" />
+        <ColumnInfo Id="Description" Index="2" />
+        <ColumnInfo Id="PartType" Index="3" />
+      </Columns>
+    </ListView>
+    <ListView Id="Part_PackWeights_ListView">
+      <Columns>
+        <ColumnInfo Id="AvgPostCon" Index="-1" />
+        <ColumnInfo Id="AvgRecCon" Index="-1" />
+        <ColumnInfo Id="BioDegrad" Index="-1" />
+        <ColumnInfo Id="Colour" Index="-1" />
+        <ColumnInfo Id="ConflictMetalComp" Index="-1" />
+        <ColumnInfo Id="ForestryCertified" Index="-1" />
+        <ColumnInfo Id="HeavyMetalComp" Index="-1" />
+        <ColumnInfo Id="MaterialCategory" Index="-1" />
+        <ColumnInfo Id="MaterialRecyclable" Index="-1" />
+        <ColumnInfo Id="MaxPostCon" Index="-1" />
+        <ColumnInfo Id="MaxRecCon" Index="-1" />
+        <ColumnInfo Id="MinPostCon" Index="-1" />
+        <ColumnInfo Id="MinRecCon" Index="-1" />
+        <ColumnInfo Id="OnPackSustMsg" Index="-1" />
+        <ColumnInfo Id="PlaceManufac" Index="-1" />
+        <ColumnInfo Id="PlacePackFill" Index="-1" />
+        <ColumnInfo Id="Refillable" Index="-1" />
+        <ColumnInfo Id="TonnesDivisor" Index="-1" />
+        <ColumnInfo Id="Type" Index="0" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Material" Index="2" />
+        <ColumnInfo Id="Quantity" Index="3" />
+        <ColumnInfo Id="SAPQuantity" Index="4" />
+        <ColumnInfo Id="UnitOfMeas" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="Part_SRAttributes_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Company" Index="-1" />
+        <ColumnInfo Id="AttributeText" Index="1" />
+        <ColumnInfo Id="AttributeNum" Index="2" />
+        <ColumnInfo Id="ReportType" Index="3" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="PartSpecifications_Dashboard" Caption="Part Specifications" IsNewNode="True">
+      <Items IsNewNode="True">
+        <DashboardViewItem Id="PackWeight_Custom_PartSpecifications_DashboardItem" ViewId="PackWeight_ListView_PartDashboard" IsNewNode="True" />
+        <DashboardViewItem Id="Part_Custom_PartSpecifications_DashboardItem" ViewId="Part_ListView_Custom" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="57.74647887323944" Caption="Main" IsNewNode="True">
+          <LayoutItem Id="Part_Custom_PartSpecifications_DashboardItem" ViewItem="Part_Custom_PartSpecifications_DashboardItem" Index="0" RelativeSize="100" IsNewNode="True" />
+        </LayoutGroup>
+        <LayoutItem Id="PackWeight_Custom_PartSpecifications_DashboardItem" ViewItem="PackWeight_Custom_PartSpecifications_DashboardItem" Index="1" RelativeSize="42.25352112676056" IsNewNode="True" />
+      </Layout>
+    </DashboardView>
+    <ListView Id="Product_ChangeHistory_ListView">
+      <Columns>
+        <ColumnInfo Id="ModifiedOn" DisplayFormat="{0:G}" />
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Product_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="56.072874493927124">
+            <LayoutGroup Id="Product" RelativeSize="100" Direction="Vertical">
+              <LayoutGroup Id="Product_col1" RelativeSize="100">
+                <LayoutGroup Id="Auto68b98ba1-2a82-47e8-a462-4182747555f2" ShowCaption="False" Caption="Auto68b98ba1-2a82-47e8-a462-4182747555f2(5)" Direction="Horizontal" Index="0" RelativeSize="15.966386554621849" IsNewNode="True">
+                  <LayoutItem Id="Oid" Index="0" RelativeSize="49.91150442477876" ViewItem="Oid" IsNewNode="True" />
+                  <LayoutItem Id="Code" Index="1" RelativeSize="50.08849557522124" ViewItem="Code" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="Name" RelativeSize="10.084033613445378" />
+                <LayoutItem Id="Description" RelativeSize="10.084033613445378" />
+                <LayoutItem Id="EANCode" RelativeSize="10.084033613445378" Index="3" />
+                <LayoutItem Id="TUCCode" RelativeSize="10.084033613445378" Index="4" />
+                <LayoutItem Id="Group" Index="5" RelativeSize="10.084033613445378" ViewItem="Group" IsNewNode="True" />
+                <LayoutItem Id="OwnBrandName" Index="6" RelativeSize="10.084033613445378" ViewItem="OwnBrandName" IsNewNode="True" />
+                <LayoutItem Id="Supplier" Index="7" RelativeSize="10.084033613445378" ViewItem="Supplier" IsNewNode="True" />
+                <LayoutItem Id="SupplierProdCode" ViewItem="SupplierProdCode" Index="8" RelativeSize="13.445378151260504" IsNewNode="True" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="43.927125506072876">
+            <LayoutGroup Id="BOMs" RelativeSize="100" Caption="Bill of Materials">
+              <LayoutItem Id="BOMs" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesVolumes" RelativeSize="100" Caption="Sales">
+              <LayoutItem Id="SalesVolumes" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Product_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveBOM" Index="-1" />
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Company" Index="-1" />
+        <ColumnInfo Id="EANCode" Index="-1" />
+        <ColumnInfo Id="Group" Index="-1" />
+        <ColumnInfo Id="IsActive" Index="-1" />
+        <ColumnInfo Id="IsImport" Index="-1" />
+        <ColumnInfo Id="SupplierProdCode" Index="-1" />
+        <ColumnInfo Id="TUCCode" Index="-1" />
+        <ColumnInfo Id="UnitType" Index="-1" />
+        <ColumnInfo Id="Code" Index="0" />
+        <ColumnInfo Id="Name" Index="1" />
+        <ColumnInfo Id="Description" Index="2" />
+        <ColumnInfo Id="Supplier" Index="3" />
+        <ColumnInfo Id="OwnBrandName" Index="4" />
+      </Columns>
+    </ListView>
+    <DashboardView Id="Products_Dashboard" Caption="Products" IsNewNode="True">
+      <Items IsNewNode="True">
+        <DashboardViewItem Id="BOMItem_Custom_ProductsDashboard" ViewId="BOMItem_ListView_Custom_ProductDashboard" IsNewNode="True" />
+        <DashboardViewItem Id="PackWeight_Custm_ProductsDashboard" ViewId="PackWeight_ListView_Custom_ProductDashboard" IsNewNode="True" />
+        <DashboardViewItem Id="PackWeight_Second_ProductDashboard" ViewId="PackWeight_ListView_ProductDashboard_Second" IsNewNode="True" />
+        <DashboardViewItem Id="ProductListView_Custom_DashboardItem" ViewId="Product_ListView_Custom" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" ShowCaption="False" Caption="Main(1)" Index="0" RelativeSize="47.17741935483871" IsNewNode="True">
+          <LayoutItem Id="ProductListView_Custom_DashboardItem" ViewItem="ProductListView_Custom_DashboardItem" Index="0" RelativeSize="100" IsNewNode="True" />
+        </LayoutGroup>
+        <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="52.82258064516129" Caption="BOM" Direction="Horizontal" IsNewNode="True">
+          <LayoutGroup Id="Auto6f427c5c-f1a1-4e1c-a562-b3d4ef56ab99" ShowCaption="False" Caption="Auto6f427c5c-f1a1-4e1c-a562-b3d4ef56ab99(4)" Index="0" RelativeSize="51.63826998689384" IsNewNode="True">
+            <LayoutItem Id="BOMItem_Custom_ProductsDashboard" Index="0" RelativeSize="50" ViewItem="BOMItem_Custom_ProductsDashboard" IsNewNode="True" />
+            <LayoutItem Id="PackWeight_Custm_ProductsDashboard" Index="1" RelativeSize="50" ViewItem="PackWeight_Custm_ProductsDashboard" IsNewNode="True" />
+          </LayoutGroup>
+          <LayoutItem Id="PackWeight_Second_ProductDashboard" Index="1" RelativeSize="48.36173001310616" ViewItem="PackWeight_Second_ProductDashboard" IsNewNode="True" />
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <ListView Id="SalesVolume_ChangeHistory_ListView">
+      <Columns>
+        <ColumnInfo Id="ModifiedOn" DisplayFormat="{0:G}" />
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesVolume_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="BOM" Index="-1" />
+        <ColumnInfo Id="GroupId" Index="-1" />
+        <ColumnInfo Id="Product" Index="-1" />
+        <ColumnInfo Id="VolumeType" Index="-1" />
+        <ColumnInfo Id="Product.Group" PropertyName="Product.Group" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Product.Code" PropertyName="Product.Code" Index="1" Caption="Product Code" IsNewNode="True" />
+        <ColumnInfo Id="Product.Name" PropertyName="Product.Name" Index="2" Caption="Product Name" IsNewNode="True" />
+        <ColumnInfo Id="Volume" Index="3" />
+        <ColumnInfo Id="Value" Index="4" />
+        <ColumnInfo Id="Customer" Index="5" />
+        <ColumnInfo Id="Rule" Index="6" />
+        <ColumnInfo Id="HasBOM" Index="7" />
+      </Columns>
+    </ListView>
+    <ListView Id="Supplier_ChangeHistory_ListView">
+      <Columns>
+        <ColumnInfo Id="ModifiedOn" DisplayFormat="{0:G}" />
+        <ColumnInfo Id="OldValue" Index="4" />
+        <ColumnInfo Id="NewValue" Index="5" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Supplier_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="47.657841140529534">
+            <LayoutGroup Id="Supplier" ShowCaption="True" Index="0" RelativeSize="100" Removed="True">
+              <LayoutGroup Id="Supplier_col1" ShowCaption="False" Index="0" RelativeSize="62.28813559322034" IsNewNode="True">
+                <LayoutGroup Id="Auto04a43521-c71c-48ac-87fc-3e1b8952ca67" ShowCaption="False" Caption="Auto04a43521-c71c-48ac-87fc-3e1b8952ca67(5)" Direction="Horizontal" Index="0" RelativeSize="27.210884353741495" IsNewNode="True">
+                  <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="38.45007451564829" IsNewNode="True" />
+                  <LayoutItem Id="PartyCode" ViewItem="PartyCode" Index="1" RelativeSize="61.54992548435171" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="Name" ViewItem="Name" Index="1" RelativeSize="17.687074829931973" IsNewNode="True" />
+                <LayoutItem Id="Group" ViewItem="Group" Index="2" RelativeSize="17.687074829931973" IsNewNode="True" />
+                <LayoutItem Id="PartyType" ViewItem="PartyType" Index="3" RelativeSize="17.687074829931973" IsNewNode="True" />
+                <LayoutItem Id="Type" ViewItem="Type" Index="4" RelativeSize="19.727891156462587" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Supplier_col2" ShowCaption="False" Index="1" RelativeSize="37.71186440677966" IsNewNode="True">
+                <LayoutItem Id="ActiveFrom" ViewItem="ActiveFrom" Index="0" RelativeSize="32.58426966292135" IsNewNode="True" />
+                <LayoutItem Id="ActiveTo" ViewItem="ActiveTo" Index="1" RelativeSize="29.213483146067414" IsNewNode="True" />
+                <LayoutItem Id="Company" ViewItem="Company" Index="2" RelativeSize="38.20224719101124" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Supplier_col1" ShowCaption="False" Index="0" RelativeSize="62.82051282051282" IsNewNode="True">
+              <LayoutGroup Id="Auto04a43521-c71c-48ac-87fc-3e1b8952ca67" ShowCaption="False" Caption="Auto04a43521-c71c-48ac-87fc-3e1b8952ca67(5)" Direction="Horizontal" Index="0" RelativeSize="27.210884353741495" IsNewNode="True">
+                <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="49.92784992784993" CaptionLocation="Left" IsNewNode="True" />
+                <LayoutItem Id="Code" ViewItem="Code" Index="1" RelativeSize="50.07215007215007" CaptionLocation="Left" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Name" ViewItem="Name" Index="1" RelativeSize="17.687074829931973" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Group" ViewItem="Group" Index="2" RelativeSize="17.687074829931973" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="PartyType" ViewItem="PartyType" Index="3" RelativeSize="17.687074829931973" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Type" ViewItem="Type" Index="4" RelativeSize="19.727891156462587" CaptionLocation="Left" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Supplier_col2" ShowCaption="False" Index="1" RelativeSize="37.17948717948718" IsNewNode="True">
+              <LayoutItem Id="ActiveFrom" ViewItem="ActiveFrom" Index="0" RelativeSize="33.333333333333336" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="ActiveTo" ViewItem="ActiveTo" Index="1" RelativeSize="29.885057471264368" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Company" ViewItem="Company" Index="2" RelativeSize="36.7816091954023" CaptionLocation="Left" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Index="1" RelativeSize="8.588957055214724" Caption="Oid" Removed="True">
+              <LayoutItem Id="Oid" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="GRIPSObject" RelativeSize="8.282208588957054" Caption="Code" Removed="True">
+              <LayoutItem Id="Code" RelativeSize="100" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="52.342158859470466">
+            <LayoutGroup Id="SupplierAddresses" RelativeSize="100" Caption="Addresses">
+              <LayoutItem Id="SupplierAddresses" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="SupplierContacts" RelativeSize="100" Caption="Contacts">
+              <LayoutItem Id="SupplierContacts" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="ChangeHistory" RelativeSize="100">
+              <LayoutItem Id="ChangeHistory" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Supplier_ListView">
+      <Columns>
+        <ColumnInfo Id="ActiveFrom" Index="-1" />
+        <ColumnInfo Id="ActiveTo" Index="-1" />
+        <ColumnInfo Id="Group" Index="-1" />
+        <ColumnInfo Id="Type" Index="-1" />
+        <ColumnInfo Id="Code" Index="0" />
+        <ColumnInfo Id="Name" Index="1" />
+        <ColumnInfo Id="PartyType" Index="2" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SupplierAddress_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="6.9105691056910565" CaptionLocation="Left" IsNewNode="True" />
+            <LayoutGroup Id="SupplierAddress_col1" ShowCaption="False" Index="1" RelativeSize="93.08943089430895" IsNewNode="True">
+              <LayoutItem Id="Address1" ViewItem="Address1" Index="0" RelativeSize="6.986899563318778" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address2" ViewItem="Address2" Index="1" RelativeSize="5.676855895196507" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address3" ViewItem="Address3" Index="2" RelativeSize="5.676855895196507" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address4" ViewItem="Address4" Index="3" RelativeSize="5.676855895196507" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="Address5" ViewItem="Address5" Index="4" RelativeSize="5.676855895196507" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutItem Id="PostCode" ViewItem="PostCode" Index="5" RelativeSize="70.3056768558952" CaptionLocation="Left" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="SupplierAddress" Direction="Vertical" RelativeSize="100" Removed="True">
+              <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="7.623318385650224" IsNewNode="True" />
+              <LayoutGroup Id="SupplierAddress_col1" ShowCaption="False" Index="1" RelativeSize="92.37668161434978" IsNewNode="True" Removed="True">
+                <LayoutItem Id="Address1" ViewItem="Address1" Index="0" RelativeSize="7.766990291262136" IsNewNode="True" />
+                <LayoutItem Id="Address2" ViewItem="Address2" Index="1" RelativeSize="6.310679611650485" IsNewNode="True" />
+                <LayoutItem Id="Address3" ViewItem="Address3" Index="2" RelativeSize="6.310679611650485" IsNewNode="True" />
+                <LayoutItem Id="Address4" ViewItem="Address4" Index="3" RelativeSize="6.310679611650485" IsNewNode="True" />
+                <LayoutItem Id="Address5" ViewItem="Address5" Index="4" RelativeSize="6.310679611650485" IsNewNode="True" />
+                <LayoutItem Id="PostCode" ViewItem="PostCode" Index="5" RelativeSize="66.99029126213593" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="SupplierAddress_col2" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Caption="Oid" RelativeSize="50.8130081300813" Removed="True">
+              <LayoutItem Id="Oid" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SupplierContact_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutItem Id="Oid" ViewItem="Oid" CaptionLocation="Left" Index="0" RelativeSize="5.284015852047556" IsNewNode="True" />
+            <LayoutGroup Id="SupplierContact_col1" ShowCaption="False" Index="1" RelativeSize="94.71598414795244" IsNewNode="True">
+              <LayoutItem Id="ContactName" ViewItem="ContactName" CaptionLocation="Left" Index="0" RelativeSize="5.160390516039052" IsNewNode="True" />
+              <LayoutItem Id="Phone" ViewItem="Phone" CaptionLocation="Left" Index="1" RelativeSize="3.905160390516039" IsNewNode="True" />
+              <LayoutItem Id="Fax" ViewItem="Fax" CaptionLocation="Left" Index="2" RelativeSize="3.905160390516039" IsNewNode="True" />
+              <LayoutItem Id="Email" ViewItem="Email" CaptionLocation="Left" Index="3" RelativeSize="3.905160390516039" IsNewNode="True" />
+              <LayoutItem Id="Web" ViewItem="Web" CaptionLocation="Left" Index="4" RelativeSize="83.12412831241284" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="SupplierContact" Direction="Vertical" RelativeSize="100" Removed="True">
+              <LayoutItem Id="Oid" ViewItem="Oid" Index="0" RelativeSize="7.623318385650224" CaptionLocation="Left" IsNewNode="True" />
+              <LayoutGroup Id="SupplierContact_col1" ShowCaption="False" Index="1" RelativeSize="92.37668161434978" IsNewNode="True" Removed="True">
+                <LayoutItem Id="ContactName" ViewItem="ContactName" Index="0" RelativeSize="7.766990291262136" CaptionLocation="Left" IsNewNode="True" />
+                <LayoutItem Id="Phone" ViewItem="Phone" Index="1" RelativeSize="6.310679611650485" CaptionLocation="Left" IsNewNode="True" />
+                <LayoutItem Id="Fax" ViewItem="Fax" Index="2" RelativeSize="6.310679611650485" CaptionLocation="Left" IsNewNode="True" />
+                <LayoutItem Id="Email" ViewItem="Email" Index="3" RelativeSize="6.310679611650485" CaptionLocation="Left" IsNewNode="True" />
+                <LayoutItem Id="Web" ViewItem="Web" Index="4" RelativeSize="73.30097087378641" CaptionLocation="Left" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="SupplierContact_col2" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="XPObject" Caption="Oid" RelativeSize="56.09756097560975" Removed="True">
+              <LayoutItem Id="Oid" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

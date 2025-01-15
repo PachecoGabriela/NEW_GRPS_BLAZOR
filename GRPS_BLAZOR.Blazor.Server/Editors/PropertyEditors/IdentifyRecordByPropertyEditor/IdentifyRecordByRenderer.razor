@@ -1,0 +1,13 @@
+﻿@using DevExpress.ExpressApp.Blazor.Components.Models
+
+<DxComboBox Data="@GetData()"
+            Value="@ComponentModel.Value" 
+            ValueChanged=@((string newValue) => ComponentModel.SetValueFromUI(newValue))
+            TextFieldName="Text" 
+            ValueFieldName="Value" />
+
+@code {
+
+    public static RenderFragment Create(IdentifyRecordByModel componentModel) =>
+    @<IdentifyRecordByRenderer ComponentModel="@componentModel" />;
+}

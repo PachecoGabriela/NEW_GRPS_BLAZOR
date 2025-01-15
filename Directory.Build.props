@@ -1,0 +1,15 @@
+<Project>
+	<PropertyGroup>
+		<DevExpressVersion>24.2.3</DevExpressVersion>
+		
+		<Deterministic>false</Deterministic>
+		<NetFrameworkVersion>net472</NetFrameworkVersion>
+		<NetStandardVersion>netstandard2.0</NetStandardVersion>			
+		
+		<Configurations>Debug;Release;ReleaseTEST</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseTEST|AnyCPU'">
+		<DefineConstants>TRACE;RELEASETEST</DefineConstants>
+	</PropertyGroup>
+</Project>

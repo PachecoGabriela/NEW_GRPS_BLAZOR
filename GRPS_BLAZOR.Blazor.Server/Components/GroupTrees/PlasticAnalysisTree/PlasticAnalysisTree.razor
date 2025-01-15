@@ -1,0 +1,12 @@
+﻿@inherits PlasticAnalysisTreeBase
+@using GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema
+@using TestSideTrees.Blazor.Server.POCOs
+
+<DxTreeView @ref=@treeView
+            AllowSelectNodes="true"
+            Data="@Items"
+            SelectionChanged="@SelectionChanged">
+    <DataMappings>
+        <DxTreeViewDataMapping Text="@nameof(TestSideTrees.Blazor.Server.POCOs.TreeItem.Name)" Children="@nameof(TestSideTrees.Blazor.Server.POCOs.TreeItem.ChildrenCollection)" />
+    </DataMappings>
+</DxTreeView>

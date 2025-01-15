@@ -1,0 +1,36 @@
+﻿@using DevExpress.ExpressApp.Blazor.Components.Models
+@using DevExpress.ExpressApp.DC
+@using GRPS_BLAZOR.Module.Helpers.Reflection
+
+<DxComboBox Data="@GetData()"
+            Value="@Value"
+            ValueChanged=@ValueChanged
+            TextFieldName="Text"
+            ValueFieldName="Value" />
+
+@code {
+    [Parameter] public string Value { get; set; }
+    [Parameter] public Type ObjectType { get; set; }
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+
+    IList<DataItem<string>> GetData()
+    {
+        IList<DataItem<string>> dataItems = new List<DataItem<string>>();
+        if (ObjectType is not null)
+        {
+            IEnumerable<IMemberInfo> visibleMembers = TypeInfoUtil.GetVisibleMembersInfo(ObjectType);
+            IEnumerable<IMemberInfo> nonListisibleMembers = TypeInfoUtil.GetNonListMembersInfo(visibleMembers);
+            IEnumerable<IMemberInfo> nonPersistentObjectMembers = TypeInfoUtil.GetNonPersistentAssociatedObjectsMemberInfo(nonListisibleMembers);
+
+            foreach (IMemberInfo member in nonPersistentObjectMembers)
+            {
+                string text = member.DisplayName;
+                if (string.IsNullOrEmpty(text))
+                    text = member.Name;
+                dataItems.Add(new DataItem<string>($"[{member.Name}] = ?", text));
+            }
+        }
+
+        return dataItems;
+    }
+}

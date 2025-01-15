@@ -1,0 +1,12 @@
+﻿@inherits PartGroupTreeBase
+@using GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema
+@using TestSideTrees.Blazor.Server.POCOs
+
+<DxTreeView @ref=@treeView
+            AllowSelectNodes="true"
+            Data="@Items"
+            SelectionChanged="@SelectionChanged">
+    <DataMappings>
+        <DxTreeViewDataMapping Text="@nameof(PartGroupTreeItem.Name)" Children="@nameof(PartGroupTreeItem.PartGroupCollection)" />
+    </DataMappings>
+</DxTreeView>
