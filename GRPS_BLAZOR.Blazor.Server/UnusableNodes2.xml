@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DashboardView Id="Products_Dashboard">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Item1">
+          <LayoutItem Id="PackWeight_Second_ProductDashboard" ViewItem="PackWeight_Second_ProductDashboard" />
+          <LayoutGroup Id="Auto6f427c5c-f1a1-4e1c-a562-b3d4ef56ab99">
+            <LayoutItem Id="PackWeight_Custm_ProductsDashboard" ViewItem="PackWeight_Custm_ProductsDashboard" />
+            <LayoutItem Id="BOMItem_Custom_ProductsDashboard" ViewItem="BOMItem_Custom_ProductsDashboard" />
+          </LayoutGroup>
+        </LayoutGroup>
+        <LayoutGroup Id="Main">
+          <LayoutItem Id="ProductListView_Custom_DashboardItem" ViewItem="ProductListView_Custom_DashboardItem" />
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DashboardView Id="PartSpecifications_Dashboard">
+      <Layout Id="Layout">
+        <LayoutItem Id="PackWeight_Custom_PartSpecifications_DashboardItem" ViewItem="PackWeight_Custom_PartSpecifications_DashboardItem" />
+        <LayoutGroup Id="Main">
+          <LayoutItem Id="Part_Custom_PartSpecifications_DashboardItem" ViewItem="Part_Custom_PartSpecifications_DashboardItem" />
+        </LayoutGroup>
+      </Layout>
+    </DashboardView>
+    <DetailView Id="ApplicationUser_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PermissionPolicyUser">
+              <LayoutItem Id="Photo" ViewItem="Photo" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="BOM_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="PackWeight">
+              <LayoutItem Id="PackWeight" ViewItem="PackWeight" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Supplier_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Supplier_col2">
+              <LayoutItem Id="Company" ViewItem="Company" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

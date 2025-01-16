@@ -76,11 +76,15 @@
       </Layout>
     </DetailView>
     <DashboardView Id="BillofMaterials_Dashboard" Caption="Bill of Materials" IsNewNode="True">
+      <Items IsNewNode="True">
+        <DashboardViewItem Id="BOMItem_ListView_DashboardItem" ViewId="BOMItem_ListView_Custom" IsNewNode="True" />
+        <DashboardViewItem Id="PackWeight_ListView_Custom_DashboardItem" ViewId="PackWeight_ListView_Custom" IsNewNode="True" />
+      </Items>
       <Layout IsNewNode="True">
-        <LayoutGroup Id="Main" ShowCaption="False" Caption="Main(1)" Index="0" RelativeSize="53.72945638432364" IsNewNode="True">
-          <LayoutItem Id="BOMItem_ListView_DashboardItem" Index="0" RelativeSize="100" ViewItem="BOMItem_ListView_DashboardItem" IsNewNode="True" />
+        <LayoutGroup Id="Main" ShowCaption="False" Caption="Main(1)" Index="0" RelativeSize="53.84615384615385" IsNewNode="True">
+          <LayoutItem Id="BOMItem_ListView_DashboardItem" ViewItem="BOMItem_ListView_DashboardItem" Index="0" RelativeSize="100" IsNewNode="True" />
         </LayoutGroup>
-        <LayoutItem Id="Part_ListView_Custom_DashboardItem" Index="1" RelativeSize="46.27054361567636" ViewItem="PackWeight_ListView_Custom_DashboardItem" IsNewNode="True" />
+        <LayoutItem Id="PackWeight_ListView_Custom_DashboardItem" ViewItem="PackWeight_ListView_Custom_DashboardItem" Index="1" RelativeSize="46.15384615384615" IsNewNode="True" />
       </Layout>
     </DashboardView>
     <ListView Id="BOM_ChangeHistory_ListView">
@@ -194,6 +198,38 @@
         <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="3" Caption="Part Name" IsNewNode="True" />
         <ColumnInfo Id="Source" Index="4" />
         <ColumnInfo Id="Quantity" Index="5" />
+      </Columns>
+    </ListView>
+    <ListView Id="BOMItem_ListView_Custom" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.BOMItem" PageSize="100" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BOM" PropertyName="BOM" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BOM.AssemblyCode" PropertyName="BOM.AssemblyCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="BOM.Product.Code" PropertyName="BOM.Product.Code" Index="1" Caption="Product Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="2" Caption="Part Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="3" Caption="Part Name" IsNewNode="True" />
+        <ColumnInfo Id="Source" PropertyName="Source" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="5" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="BOMItem_ListView_Custom_ProductDashboard" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.BOMItem" PageSize="100" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BOM" PropertyName="BOM" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BOM.AssemblyCode" PropertyName="BOM.AssemblyCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="BOM.Product.Code" PropertyName="BOM.Product.Code" Index="1" Caption="Product Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="2" Caption="Part Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="3" Caption="Part Name" IsNewNode="True" />
+        <ColumnInfo Id="Source" PropertyName="Source" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="5" IsNewNode="True" />
       </Columns>
     </ListView>
     <DetailView Id="ComplianceRule_DetailView">
@@ -444,6 +480,134 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="PackWeight_ListView_Custom" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="0" Caption="Part Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="1" Caption="Part Name" IsNewNode="True" />
+        <ColumnInfo Id="Part.Description" PropertyName="Part.Description" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="4" Caption="Pack Level" IsNewNode="True" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="7" Caption="Weight" IsNewNode="True" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="8" Caption="SAP Weight" IsNewNode="True" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="9" Caption="Unit" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackWeight_ListView_Custom_ProductDashboard" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="0" Caption="Part Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="1" Caption="Part Name" IsNewNode="True" />
+        <ColumnInfo Id="Part.Description" PropertyName="Part.Description" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="4" Caption="Pack Level" IsNewNode="True" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="7" Caption="Weight" IsNewNode="True" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="8" Caption="SAP Weight" IsNewNode="True" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="9" Caption="Unit" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackWeight_ListView_PartDashboard" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="3" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackWeight_ListView_ProductDashboard_Second" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.PackWeight" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="AvgPostCon" PropertyName="AvgPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="AvgRecCon" PropertyName="AvgRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="BioDegrad" PropertyName="BioDegrad" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Colour" PropertyName="Colour" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ConflictMetalComp" PropertyName="ConflictMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ForestryCertified" PropertyName="ForestryCertified" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="HeavyMetalComp" PropertyName="HeavyMetalComp" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaterialCategory" PropertyName="MaterialCategory" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaterialRecyclable" PropertyName="MaterialRecyclable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxPostCon" PropertyName="MaxPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MaxRecCon" PropertyName="MaxRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinPostCon" PropertyName="MinPostCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="MinRecCon" PropertyName="MinRecCon" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="OnPackSustMsg" PropertyName="OnPackSustMsg" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part" PropertyName="Part" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part.Code" PropertyName="Part.Code" Index="-1" Caption="Part Code" IsNewNode="True" />
+        <ColumnInfo Id="Part.Description" PropertyName="Part.Description" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Part.Name" PropertyName="Part.Name" Index="-1" Caption="Part Name" IsNewNode="True" />
+        <ColumnInfo Id="PlaceManufac" PropertyName="PlaceManufac" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PlacePackFill" PropertyName="PlacePackFill" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Refillable" PropertyName="Refillable" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TonnesDivisor" PropertyName="TonnesDivisor" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Type" PropertyName="Type" Index="0" Caption="Level" IsNewNode="True" />
+        <ColumnInfo Id="Part.PartType" PropertyName="Part.PartType" Index="1" Caption="Type" IsNewNode="True" />
+        <ColumnInfo Id="Material" PropertyName="Material" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="3" Caption="Quantity" IsNewNode="True" />
+        <ColumnInfo Id="SAPQuantity" PropertyName="SAPQuantity" Index="4" Caption="SAP Qty" IsNewNode="True" />
+        <ColumnInfo Id="UnitOfMeas" PropertyName="UnitOfMeas" Index="5" Caption="Unit Of Meas" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <ListView Id="Part_BOMItems_ListView">
       <Columns>
         <ColumnInfo Id="ActiveFrom" Index="-1" />
@@ -555,6 +719,20 @@
         <ColumnInfo Id="PartType" Index="3" />
       </Columns>
     </ListView>
+    <ListView Id="Part_ListView_Custom" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.Part" PageSize="100" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ParentComponent" PropertyName="ParentComponent" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="PartGroup" PropertyName="PartGroup" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Code" PropertyName="Code" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" SortIndex="0" SortOrder="Ascending" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="PartType" PropertyName="PartType" Index="5" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <ListView Id="Part_PackWeights_ListView">
       <Columns>
         <ColumnInfo Id="AvgPostCon" Index="-1" />
@@ -599,10 +777,10 @@
         <DashboardViewItem Id="Part_Custom_PartSpecifications_DashboardItem" ViewId="Part_ListView_Custom" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
-        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="57.74647887323944" Caption="Main" IsNewNode="True">
-          <LayoutItem Id="Part_Custom_PartSpecifications_DashboardItem" ViewItem="Part_Custom_PartSpecifications_DashboardItem" Index="0" RelativeSize="100" IsNewNode="True" />
+        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True">
+          <LayoutItem Id="Part_Custom_PartSpecifications_DashboardItem" ViewItem="Part_Custom_PartSpecifications_DashboardItem" Index="0" RelativeSize="49.4204425711275" IsNewNode="True" />
+          <LayoutItem Id="PackWeight_Custom_PartSpecifications_DashboardItem" ViewItem="PackWeight_Custom_PartSpecifications_DashboardItem" Index="1" RelativeSize="50.5795574288725" IsNewNode="True" />
         </LayoutGroup>
-        <LayoutItem Id="PackWeight_Custom_PartSpecifications_DashboardItem" ViewItem="PackWeight_Custom_PartSpecifications_DashboardItem" Index="1" RelativeSize="42.25352112676056" IsNewNode="True" />
       </Layout>
     </DashboardView>
     <ListView Id="Product_ChangeHistory_ListView">
@@ -664,6 +842,28 @@
         <ColumnInfo Id="OwnBrandName" Index="4" />
       </Columns>
     </ListView>
+    <ListView Id="Product_ListView_Custom" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema.Product" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ActiveBOM" PropertyName="ActiveBOM" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ActiveFrom" PropertyName="ActiveFrom" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ActiveTo" PropertyName="ActiveTo" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Company" PropertyName="Company" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="EANCode" PropertyName="EANCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Group" PropertyName="Group" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsActive" PropertyName="IsActive" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="IsImport" PropertyName="IsImport" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SupplierProdCode" PropertyName="SupplierProdCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TUCCode" PropertyName="TUCCode" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="UnitType" PropertyName="UnitType" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Code" PropertyName="Code" Index="0" Caption="Product Code" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" SortIndex="0" SortOrder="Ascending" Index="1" Caption="Product Name" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Index="2" Caption="Product Description" IsNewNode="True" />
+        <ColumnInfo Id="HasBOM" PropertyName="HasBOM" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="Supplier" PropertyName="Supplier" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="OwnBrandName" PropertyName="OwnBrandName" Index="5" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <DashboardView Id="Products_Dashboard" Caption="Products" IsNewNode="True">
       <Items IsNewNode="True">
         <DashboardViewItem Id="BOMItem_Custom_ProductsDashboard" ViewId="BOMItem_ListView_Custom_ProductDashboard" IsNewNode="True" />
@@ -672,15 +872,15 @@
         <DashboardViewItem Id="ProductListView_Custom_DashboardItem" ViewId="Product_ListView_Custom" IsNewNode="True" />
       </Items>
       <Layout IsNewNode="True">
-        <LayoutGroup Id="Main" ShowCaption="False" Caption="Main(1)" Index="0" RelativeSize="47.17741935483871" IsNewNode="True">
-          <LayoutItem Id="ProductListView_Custom_DashboardItem" ViewItem="ProductListView_Custom_DashboardItem" Index="0" RelativeSize="100" IsNewNode="True" />
-        </LayoutGroup>
-        <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="52.82258064516129" Caption="BOM" Direction="Horizontal" IsNewNode="True">
-          <LayoutGroup Id="Auto6f427c5c-f1a1-4e1c-a562-b3d4ef56ab99" ShowCaption="False" Caption="Auto6f427c5c-f1a1-4e1c-a562-b3d4ef56ab99(4)" Index="0" RelativeSize="51.63826998689384" IsNewNode="True">
-            <LayoutItem Id="BOMItem_Custom_ProductsDashboard" Index="0" RelativeSize="50" ViewItem="BOMItem_Custom_ProductsDashboard" IsNewNode="True" />
-            <LayoutItem Id="PackWeight_Custm_ProductsDashboard" Index="1" RelativeSize="50" ViewItem="PackWeight_Custm_ProductsDashboard" IsNewNode="True" />
+        <LayoutGroup Id="Main" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True">
+          <LayoutItem Id="ProductListView_Custom_DashboardItem" ViewItem="ProductListView_Custom_DashboardItem" Index="0" RelativeSize="47.56258234519104" IsNewNode="True" />
+          <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="1" RelativeSize="52.43741765480896" Caption="BOM" Direction="Horizontal" IsNewNode="True">
+            <LayoutGroup Id="Auto958a0163-f3ff-4d6b-9df5-df37c0849a75" ShowCaption="False" Caption="" Index="0" RelativeSize="49.157303370786515" IsNewNode="True">
+              <LayoutItem Id="BOMItem_Custom_ProductsDashboard" ViewItem="BOMItem_Custom_ProductsDashboard" Index="0" RelativeSize="53.333333333333336" IsNewNode="True" />
+              <LayoutItem Id="PackWeight_Custm_ProductsDashboard" ViewItem="PackWeight_Custm_ProductsDashboard" Index="1" RelativeSize="46.666666666666664" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="PackWeight_Second_ProductDashboard" ViewItem="PackWeight_Second_ProductDashboard" Index="1" RelativeSize="50.842696629213485" IsNewNode="True" />
           </LayoutGroup>
-          <LayoutItem Id="PackWeight_Second_ProductDashboard" Index="1" RelativeSize="48.36173001310616" ViewItem="PackWeight_Second_ProductDashboard" IsNewNode="True" />
         </LayoutGroup>
       </Layout>
     </DashboardView>
