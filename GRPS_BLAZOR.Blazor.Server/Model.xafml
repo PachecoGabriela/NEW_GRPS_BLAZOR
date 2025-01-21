@@ -20,7 +20,11 @@
           <Item Id="TotalPackWeight_ListView" ImageName="CalculationOptions" />
         </Items>
       </Item>
-      <Item Id="Default" Caption="Security System" />
+      <Item Id="Default" Caption="Security System">
+        <Items>
+          <Item Id="SpreadsheetContainer_ListView" Removed="True" />
+        </Items>
+      </Item>
       <Item Id="Grips Desktop">
         <Items>
           <Item Id="ProductsDashboard" Caption="Products" ViewId="Products_Dashboard" Index="0" ImageName="ProductQuickShippments" IsNewNode="True" />
@@ -30,6 +34,7 @@
           <Item Id="BillofMaterials" Index="4" Caption="Bill of Materials" ViewId="BillofMaterials_Dashboard" ImageName="BO_Order_Item" IsNewNode="True" />
           <Item Id="SalesVolume_ListView" Caption="Sales" Index="5" ImageName="BO_Sale" />
           <Item Id="ComplianceRule_ListView" Caption="Rules" Index="6" ImageName="BO_Task" />
+          <Item Id="SpreadsheetContainer_ListView" ViewId="SpreadsheetContainer_ListView" ObjectKey="" ImageName="Action_Export_ToXLS" IsNewNode="True" />
         </Items>
       </Item>
       <Item Id="Import Tool">
