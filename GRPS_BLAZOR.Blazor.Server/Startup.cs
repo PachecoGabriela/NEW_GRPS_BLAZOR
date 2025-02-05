@@ -29,10 +29,17 @@ public class Startup {
     // This method gets called by the runtime. Use this method to add services to the container.
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services) {
+
+        //licensing Syncfusion
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzU1ODY4OEAzMjM3MmUzMDJlMzBlRkhIMENNZXM0ckw0cWlYTXdLV3RyV1JRODlESXRWSmZiS2F6aUVsTGVNPQ==");
+
         services.AddSingleton(typeof(Microsoft.AspNetCore.SignalR.HubConnectionHandler<>), typeof(ProxyHubConnectionHandler<>));
 
         services.AddRazorPages();
-        services.AddServerSideBlazor();
+        services.AddServerSideBlazor().AddHubOptions(options =>
+        {
+            options.MaximumReceiveMessageSize = 1024 * 1024 * 100; // 100 MB
+        });
         services.AddHttpContextAccessor();
         services.AddScoped<CircuitHandler, CircuitHandlerProxy>();
         services.AddXaf(Configuration, builder => {

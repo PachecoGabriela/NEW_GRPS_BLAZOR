@@ -30,7 +30,7 @@
 	<PackageReference Include="DevExpress.ExpressApp.Office.Blazor" Version="24.2.3" />
 	<PackageReference Include="DevExpress.Document.Processor" Version="24.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
-    <PackageReference Include="Syncfusion.EJ2.Spreadsheet.AspNet.Core" Version="28.1.41" />
+    <PackageReference Include="Syncfusion.EJ2.Spreadsheet.AspNet.Core" Version="27.1.57" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExcelImport.Blazor\ExcelImport.Blazor.csproj" />
