@@ -13,6 +13,14 @@
       </ActionContainer>
     </ActionToContainerMapping>
   </ActionDesign>
+  <BOModel>
+    <Class Name="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject">
+      <OwnMembers>
+        <Member Name="FileLinks" PropertyEditorType="GRPS_BLAZOR.Blazor.Server.Editors.PropertyEditors.UploadFileEditor.LabelPropertyEditor" DocumentStorageFormat="Html" />
+        <Member Name="Message" PropertyEditorType="DevExpress.ExpressApp.Office.Blazor.Editors.RichTextPropertyEditor" DocumentStorageFormat="Html" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
   <NavigationItems>
     <Items>
       <Item Id="Calculations">
@@ -34,7 +42,14 @@
           <Item Id="BillofMaterials" Index="4" Caption="Bill of Materials" ViewId="BillofMaterials_Dashboard" ImageName="BO_Order_Item" IsNewNode="True" />
           <Item Id="SalesVolume_ListView" Caption="Sales" Index="5" ImageName="BO_Sale" />
           <Item Id="ComplianceRule_ListView" Caption="Rules" Index="6" ImageName="BO_Task" />
-          <Item Id="SpreadsheetContainer_ListView" ViewId="SpreadsheetContainer_ListView" ObjectKey="" ImageName="Action_Export_ToXLS" IsNewNode="True" />
+          <Item Id="SpreadsheetContainer_ListView" ViewId="SpreadsheetContainer_ListView" ObjectKey="" ImageName="Action_Export_ToXLS" Index="7" IsNewNode="True" />
+          <Item Id="EmailsItem" Caption="Emails" Index="8" IsNewNode="True">
+            <Items IsNewNode="True">
+              <Item Id="DraftEmails" Caption="Drafts" ChildItemsDisplayStyle="LargeIcons" ViewId="EmailObject_ListView_Draft" IsNewNode="True" />
+              <Item Id="EmailsSent" Caption="Sent" ViewId="EmailObject_ListView_Sent" IsNewNode="True" />
+              <Item Id="ReceivedEmails" Caption="Received" ViewId="EmailObject_ListView_Received" IsNewNode="True" />
+            </Items>
+          </Item>
         </Items>
       </Item>
       <Item Id="Import Tool">
@@ -58,14 +73,13 @@
     <DetailView Id="ApplicationUser_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="17.373737373737374">
-            <LayoutGroup Id="PermissionPolicyUser" Direction="Horizontal" RelativeSize="100" Caption="PermissionPolicyUser" Index="0">
-              <LayoutGroup Id="Auto928758e5-fe5f-4d62-b181-17ca47316aa4" ShowCaption="False" Caption="" Index="0" RelativeSize="76.34543178973718" IsNewNode="True">
-                <LayoutItem Id="UserName" ViewItem="UserName" Index="0" RelativeSize="37.2093023255814" IsNewNode="True" />
-                <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="27.906976744186046" IsNewNode="True" />
-                <LayoutItem Id="ChangePasswordOnFirstLogon" ViewItem="ChangePasswordOnFirstLogon" Index="2" RelativeSize="34.883720930232556" IsNewNode="True" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="18.62348178137652">
+            <LayoutGroup Id="PermissionPolicyUser" Direction="Vertical" RelativeSize="100" Caption="PermissionPolicyUser" Index="0">
+              <LayoutGroup Id="Auto928758e5-fe5f-4d62-b181-17ca47316aa4" ShowCaption="False" Caption="Auto928758e5-fe5f-4d62-b181-17ca47316aa4(4)" Index="0" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="UserName" ViewItem="UserName" Index="0" RelativeSize="36.95652173913044" IsNewNode="True" />
+                <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="28.26086956521739" IsNewNode="True" />
+                <LayoutItem Id="ChangePasswordOnFirstLogon" ViewItem="ChangePasswordOnFirstLogon" Index="2" RelativeSize="34.78260869565217" IsNewNode="True" />
               </LayoutGroup>
-              <LayoutItem Id="Photo" ViewItem="Photo" Index="1" RelativeSize="23.654568210262827" ShowCaption="False" IsNewNode="True" />
               <LayoutItem Id="ChangePasswordOnFirstLogon" Removed="True" />
               <LayoutItem Id="IsActive" Removed="True" />
               <LayoutItem Id="UserName" Removed="True" />
@@ -74,7 +88,8 @@
               <LayoutItem Id="Photo" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="Roles_Group" Direction="Vertical" RelativeSize="82.62626262626263">
+          <LayoutItem Id="Email" ViewItem="Email" Index="1" RelativeSize="5.2631578947368425" IsNewNode="True" />
+          <LayoutGroup Id="Roles_Group" Direction="Vertical" RelativeSize="76.11336032388664" Index="2">
             <LayoutItem Id="Roles" RelativeSize="100" />
           </LayoutGroup>
         </LayoutGroup>
@@ -418,6 +433,97 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <DetailView Id="EmailObject_DetailView_Draft" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="FileLinks" PropertyName="FileLinks" IsNewNode="True" />
+        <PropertyEditor Id="Message" PropertyName="Message" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="Subject" PropertyName="Subject" IsNewNode="True" />
+        <PropertyEditor Id="To" PropertyName="To" IsNewNode="True" />
+        <PropertyEditor Id="UploadFile" PropertyName="UploadFile" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="11.864406779661017" IsNewNode="True">
+            <LayoutGroup Id="EmailObject" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Subject" ViewItem="Subject" ShowCaption="" Index="0" RelativeSize="51.42857142857143" IsNewNode="True" />
+              <LayoutItem Id="To" ViewItem="To" ShowCaption="" Index="1" RelativeSize="48.57142857142857" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="88.13559322033899" Caption="Message" IsNewNode="True">
+            <LayoutItem Id="UploadFile" ViewItem="UploadFile" Index="0" RelativeSize="5.769230769230769" IsNewNode="True" />
+            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="1" RelativeSize="94.23076923076923" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="EmailObject_DetailView_Received" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Message" PropertyName="Message" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="Subject" PropertyName="Subject" IsNewNode="True" />
+        <PropertyEditor Id="To" PropertyName="To" IsNewNode="True" />
+        <PropertyEditor Id="ToEmail" PropertyName="ToEmail" RowCount="1" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="11.864406779661017" IsNewNode="True">
+            <LayoutGroup Id="EmailObject" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Subject" ViewItem="Subject" ShowCaption="" Index="0" RelativeSize="51.42857142857143" IsNewNode="True" />
+              <LayoutItem Id="ToEmail" ViewItem="ToEmail" Index="1" RelativeSize="48.57142857142857" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="88.13559322033899" IsNewNode="True">
+            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="EmailObject_DetailView_Sent" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Message" PropertyName="Message" IsNewNode="True" />
+        <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
+        <PropertyEditor Id="Subject" PropertyName="Subject" IsNewNode="True" />
+        <PropertyEditor Id="To" PropertyName="To" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="13.983050847457626" IsNewNode="True">
+            <LayoutGroup Id="EmailObject" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Subject" ViewItem="Subject" ShowCaption="" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+              <LayoutItem Id="To" ViewItem="To" ShowCaption="" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="86.01694915254237" IsNewNode="True">
+            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="EmailObject_ListView_Draft" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" DetailViewID="EmailObject_DetailView_Draft" Criteria="[Sent] = False And [Received] = False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Message" PropertyName="Message" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Subject" PropertyName="Subject" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="To" PropertyName="To" Index="1" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="EmailObject_ListView_Received" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" DetailViewID="EmailObject_DetailView_Received" Criteria="[Received] = True" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Message" PropertyName="Message" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="To" PropertyName="To" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Subject" PropertyName="Subject" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="EmailObject_ListView_Sent" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" DetailViewID="EmailObject_DetailView_Sent" Criteria="[Sent] = True And [Received] = False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Message" PropertyName="Message" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Subject" PropertyName="Subject" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="To" PropertyName="To" Index="1" IsNewNode="True" />
+      </Columns>
+    </ListView>
     <DetailView Id="PackWeight_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">

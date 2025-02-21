@@ -30,6 +30,7 @@
 	<PackageReference Include="DevExpress.ExpressApp.Office.Blazor" Version="24.2.3" />
 	<PackageReference Include="DevExpress.Document.Processor" Version="24.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
+    <PackageReference Include="SendGrid" Version="9.29.3" />
     <PackageReference Include="Syncfusion.EJ2.Spreadsheet.AspNet.Core" Version="27.1.57" />
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +46,15 @@
       <DependentUpon>Model.xafml</DependentUpon>
     </None>
     <None Update="UnusableNodes3.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes4.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes5.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes6.xml">
       <DependentUpon>Model.xafml</DependentUpon>
     </None>
   </ItemGroup>

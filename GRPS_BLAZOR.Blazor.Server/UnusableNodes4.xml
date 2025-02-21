@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="EmailObject_ListView_Received">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CompanyCode" PropertyName="CompanyCode" Index="-1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="EmailObject_DetailView_Received">
+      <Items Id="Items">
+        <PropertyEditor Id="CompanyCode" PropertyName="CompanyCode" />
+      </Items>
+    </DetailView>
+    <DetailView Id="ApplicationUser_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PermissionPolicyUser">
+              <LayoutItem Id="Photo" ViewItem="Photo" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="BOM_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="PackWeight">
+              <LayoutItem Id="PackWeight" ViewItem="PackWeight" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Supplier_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Supplier_col2">
+              <LayoutItem Id="Company" ViewItem="Company" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

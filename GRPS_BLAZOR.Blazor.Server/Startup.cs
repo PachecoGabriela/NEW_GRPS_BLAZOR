@@ -16,6 +16,7 @@ using DevExpress.ExpressApp;
 using DevExpress.Xpo;
 using GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema;
 using XafCustomComponents.Services;
+using GRPS_BLAZOR.Blazor.Server.Middleware;
 
 namespace GRPS_BLAZOR.Blazor.Server;
 
@@ -40,6 +41,8 @@ public class Startup {
         {
             options.MaximumReceiveMessageSize = 1024 * 1024 * 100; // 100 MB
         });
+        
+
         services.AddHttpContextAccessor();
         services.AddScoped<CircuitHandler, CircuitHandlerProxy>();
         services.AddXaf(Configuration, builder => {
@@ -82,6 +85,7 @@ public class Startup {
                     options.ConnectionString = connectionString;
                     options.ThreadSafe = true;
                     options.UseSharedDataStoreProvider = true;
+                    options.AllowICommandChannelDoWithSecurityContext = true;
                 })
                 .AddNonPersistent();
             builder.Security
@@ -126,6 +130,9 @@ public class Startup {
             XPObjectSpace objectSpace = (XPObjectSpace)objectSpaceFactory.CreateObjectSpace(typeof(ApplicationUser));
             return (UnitOfWork)objectSpace.Session;
         });
+
+        var sendGridClientManager = SendGridClientManager.GetInstance(Configuration);
+        services.AddSingleton(sendGridClientManager);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,6 +145,7 @@ public class Startup {
             // The default HSTS value is 30 days. To change this for production scenarios, see: https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
+        app.UseMiddleware<UploadFileMiddleware>();
         app.UseHttpsRedirection();
         app.UseRequestLocalization();
         app.UseStaticFiles();

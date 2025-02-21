@@ -10,10 +10,12 @@ namespace GRPS_BLAZOR.Module.BusinessObjects;
 [MapInheritance(MapInheritanceType.ParentTable)]
 [DefaultProperty(nameof(UserName))]
 public class ApplicationUser : PermissionPolicyUser, ISecurityUserWithLoginInfo, ISecurityUserLockout {
+    string userEmail;
     private int accessFailedCount;
     private DateTime lockoutEnd;
 
     public ApplicationUser(Session session) : base(session) { }
+
 
     [Browsable(false)]
     public int AccessFailedCount {
