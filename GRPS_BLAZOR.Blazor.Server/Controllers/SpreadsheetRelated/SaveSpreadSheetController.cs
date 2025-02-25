@@ -10,6 +10,7 @@ using DevExpress.ExpressApp.SystemModule;
 using DevExpress.ExpressApp.Templates;
 using DevExpress.ExpressApp.Utils;
 using DevExpress.ExpressApp.Validation.AllContextsView;
+using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
 using GRPS_BLAZOR.Blazor.Server.Services;
@@ -24,10 +25,6 @@ using System.Text;
 
 namespace GRPS_BLAZOR.Blazor.Server.Controllers.SpreadsheetRelated
 {
-    public static class GlobalContextSpreadSheet
-    {
-        public static SpreadsheetContainer SelectedRecord { get; set; }
-    }
 
     public partial class SaveSpreadSheetController : ObjectViewController<DetailView, SpreadsheetContainer>
     {
@@ -44,16 +41,19 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.SpreadsheetRelated
 
             SendEmailButton = new SimpleAction(this, "SendEmailToSupplier", PredefinedCategory.View);
             SendEmailButton.Caption = "Send email to suppliers";
+            SendEmailButton.ImageName = "Actions_EnvelopeOpen";
             SendEmailButton.Execute += SendEmailButton_Execute;
 
             NotificationButton = new SimpleAction(this, "NotificationButton", PredefinedCategory.View);
             NotificationButton.Caption = "Complete";
             NotificationButton.ToolTip = "Sends a notification that spreadsheet is completed";
+            NotificationButton.ImageName = "Action_MarkCompleted";
             NotificationButton.Execute += NotificationButton_Execute;
         }
 
         private async void NotificationButton_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
+            var session = ((XPObjectSpace)ObjectSpace).Session;
             var CurrentObject = (SpreadsheetContainer)View.CurrentObject;
 
             if (CurrentObject == null || CurrentObject.SpreadsheetFile == null)
@@ -66,7 +66,21 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.SpreadsheetRelated
             {
                 SendGridM = Application.ServiceProvider.GetRequiredService<SendGridClientManager>();
                 string Message = string.Format("{0} informs that their spreadsheet is completed", CurrentObject.CompanyName);
-                await SendGridM.SendEmail(CurrentObject.CreatedBy.Email, Message, "Completion of Spreadsheet", null);
+                bool response = await SendGridM.SendEmail(CurrentObject.CreatedBy.Email, Message, "Completion of Spreadsheet", null);
+                if (response)
+                {
+                    EmailObject NewEmail = new EmailObject(session);
+
+                    NewEmail.Subject = "Completion of Spreadsheet";
+                    NewEmail.ToEmail = CurrentObject.CreatedBy.Email;
+                    NewEmail.Message = Message;
+                    NewEmail.Received = true;
+                    NewEmail.Sent = true;
+                    NewEmail.From = currentUser.Email;
+
+                    CurrentObject.Status = SpreadSheetStatus.Completed;
+                    session.CommitTransaction();
+                }
             }
             else
                 Application.ShowViewStrategy.ShowMessage("There are empty fields.");
@@ -129,10 +143,10 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.SpreadsheetRelated
                 {
                     if (!string.IsNullOrEmpty(currentUser.Email))
                     {
-                        GlobalContextSpreadSheet.SelectedRecord = CurrentObject;
                         var objectSpace = Application.CreateObjectSpace();
                         var NewEmail = objectSpace.CreateObject<EmailObject>();
                         NewEmail.From = currentUser.Email;
+                        NewEmail.OriginContainer = objectSpace.GetObject(CurrentObject); 
 
                         if (objectSpace.IsModified)
                             objectSpace.CommitChanges();

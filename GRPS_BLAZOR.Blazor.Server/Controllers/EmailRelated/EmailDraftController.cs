@@ -29,11 +29,6 @@ using Microsoft.AspNetCore.StaticFiles;
 
 namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 {
-    public static class GlobalContext
-    {
-        public static List<Supplier> SelectedSuppliers { get; set; } = new List<Supplier>();
-    }
-
     public partial class EmailDraftController : ViewController<DetailView>
     {
         SimpleAction SendEmail;
@@ -50,11 +45,13 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             SendEmail = new SimpleAction(this, "SendEmailButton", PredefinedCategory.View);
             SendEmail.Caption = "Send Email";
             SendEmail.ToolTip = "Send this email to the suppliers selected";
+            SendEmail.ImageName = "Actions_EnvelopeOpen";
             SendEmail.Execute += SendEmail_Execute;
 
             ShowSuppliers = new PopupWindowShowAction(this, "ShowSuppliersButton", PredefinedCategory.View);
             ShowSuppliers.Caption = "Add Suppliers";
             ShowSuppliers.ToolTip = "Show List of Suppliers";
+            ShowSuppliers.ImageName = "ListBullets_32x32";
             ShowSuppliers.CustomizePopupWindowParams += ShowSuppliers_CustomizePopupWindowParams; ;
             ShowSuppliers.Executed += ShowSuppliers_Executed;
         }
@@ -67,18 +64,19 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 
             if (selectedObjects.Any())
             {
-                GlobalContext.SelectedSuppliers = selectedObjects;
+                CurrentObject.suppliersSelected = selectedObjects;
+                CurrentObject.Save();
             }
             else
             {
-                throw new InvalidOperationException("No se seleccionaron objetos del tipo Supplier.");
+                throw new InvalidOperationException("No suppliers were selected.");
             }
 
             List<string> SupplierCodes = new List<string>();
 
-            if (GlobalContext.SelectedSuppliers.Any())
+            if (CurrentObject.suppliersSelected.Any())
             {
-                foreach (var supplier in GlobalContext.SelectedSuppliers)
+                foreach (var supplier in CurrentObject.suppliersSelected)
                 {
                     SupplierCodes.Add(supplier.Code);
                 }
@@ -104,13 +102,13 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
                 var collectionSource = new CollectionSource(newObjectSpace, typeof(Supplier));
                 var listView = Application.CreateListView("Supplier_ListView", collectionSource, false);
 
-                if (GlobalContext.SelectedSuppliers is not null && GlobalContext.SelectedSuppliers.Any())
+                if (CurrentObject.suppliersSelected.Any())
                 {
                     listView.ControlsCreated += (sender, args) =>
                     {
                         DxGridListEditor dxGridListEditor = listView.Editor as DxGridListEditor;
                        
-                        var selectedOids = GlobalContext.SelectedSuppliers?.Select(s => s.Oid).ToList();
+                        var selectedOids = CurrentObject.suppliersSelected?.Select(s => s.Oid).ToList();
 
                         if (selectedOids != null && selectedOids.Any())
                         {
@@ -135,11 +133,11 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             Supplier CurrentSupplier;
             string supplierEmailsList;
 
-            if (GlobalContext.SelectedSuppliers.Any())
+            if (CurrentObject.suppliersSelected.Any())
             {
                 if (!string.IsNullOrEmpty(CurrentObject.Subject))
                 {
-                    foreach (var Supplier in GlobalContext.SelectedSuppliers)
+                    foreach (var Supplier in CurrentObject.suppliersSelected)
                     {
                         CurrentSupplier = Supplier;
                         List<string> ContactEmails = new List<string>();
@@ -169,12 +167,14 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 
                         if (response)
                         {
-                            if (GlobalContextSpreadSheet.SelectedRecord is not null)
+                            if (CurrentObject.OriginContainer is not null)
                             {
                                 var session = ((XPObjectSpace)ObjectSpace).Session;
 
-                                CreateRecords(GlobalContextSpreadSheet.SelectedRecord, CurrentSupplier, CurrentObject, supplierEmailsList, session);
+                                CreateRecords(CurrentObject.OriginContainer, CurrentSupplier, CurrentObject, supplierEmailsList, session);
                             }
+
+                            Application.ShowViewStrategy.ShowMessage("Emails and spreadheets created succesfully");
                         }
                     }
 
@@ -202,26 +202,6 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             return "application/octet-stream"; // Tipo genérico para archivos desconocidos
         }
 
-        private Session CreateSessionForConnection(string connectionString)
-        {
-            var dataStore = XpoDefault.GetConnectionProvider(connectionString, AutoCreateOption.SchemaAlreadyExists);
-            var dataLayer = new SimpleDataLayer(new ReflectionDictionary(), dataStore);
-            return new Session(dataLayer);
-        }
-
-        private string GetMasterDatabaseConnectionString()
-        {
-            var configuration = Application.ServiceProvider.GetRequiredService<IConfiguration>();
-            return configuration.GetConnectionString("DefaultConnection"); 
-        }
-
-        private Session CreateSessionForTenant(string connectionString)
-        {
-            var dataStore = XpoDefault.GetConnectionProvider(connectionString, AutoCreateOption.SchemaAlreadyExists);
-            var dataLayer = new SimpleDataLayer(new ReflectionDictionary(), dataStore);
-            return new Session(dataLayer);
-        }
-
         private void CreateRecords(SpreadsheetContainer selectedRecord, Supplier currentSupplier, EmailObject currentObject, string supplierEmailsList, Session session)
         {
             QueryParameterCollection SsParameter = new QueryParameterCollection();
@@ -234,8 +214,9 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             SsParameter.Add(currentSupplier.Name);
             SsParameter.Add(selectedRecord.SpreadsheetFile);
             SsParameter.Add(selectedRecord.CreatedBy.Oid);
+            SsParameter.Add((int)SpreadSheetStatus.Created);
 
-            string sqlDs = $"INSERT INTO [SpreadsheetContainer] ([Oid],[FileName],[CompanyCode],[CompanyName],[SpreadsheetFile],[CreatedBy]) values (@p0,@p1,@p2,@p3,@p4,@p5)";
+            string sqlDs = $"INSERT INTO [SpreadsheetContainer] ([Oid],[FileName],[CompanyCode],[CompanyName],[SpreadsheetFile],[CreatedBy],[Status]) values (@p0,@p1,@p2,@p3,@p4,@p5,@p6)";
             session.ExecuteNonQuery(sqlDs, SsParameter);
 
             QueryParameterCollection EParameter = new QueryParameterCollection();
@@ -289,8 +270,6 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 
             if (View.ObjectSpace != null)
                 View.ObjectSpace.ModifiedChanged += ObjectSpace_ModifiedChanged;
-
-            GlobalContext.SelectedSuppliers.Clear();
         }
 
         private void ObjectSpace_ObjectChanged(object sender, ObjectChangedEventArgs e)

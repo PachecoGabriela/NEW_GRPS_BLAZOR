@@ -25,23 +25,38 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
         // https://docs.devexpress.com/CodeRushForRoslyn/403133/
         public EmailFilterController()
         {
-            InitializeComponent();
-            TargetViewId = "EmailObject_ListView_Received";
-
-           
+            InitializeComponent();  
         }
         protected override void OnActivated()
         {
             base.OnActivated();
-            if (View is ListView listView && listView.CollectionSource is CollectionSourceBase collectionSource)
-            {
-
-                var currentUser = SecuritySystem.CurrentUser as ApplicationUser;
-                if (currentUser is not null)
+             if (View.Id == "EmailObject_ListView_Received")
+             {
+                if (View is ListView listView && listView.CollectionSource is CollectionSourceBase collectionSource)
                 {
-                    collectionSource.Criteria["CustomFilter"] = CriteriaOperator.Parse("Contains(ToEmail, ?)", currentUser.Email);
+
+                    var currentUser = SecuritySystem.CurrentUser as ApplicationUser;
+                    if (currentUser is not null)
+                    {
+                        collectionSource.Criteria["CustomFilter"] = CriteriaOperator.Parse("Contains(ToEmail, ?)", currentUser.Email);
+                    }
                 }
-            }
+             }
+
+             if (View.Id == "EmailObject_ListView_Draft" || View.Id == "EmailObject_ListView_Sent")
+             {
+                if (View is ListView listView && listView.CollectionSource is CollectionSourceBase collectionSource)
+                {
+
+                    var currentUser = SecuritySystem.CurrentUser as ApplicationUser;
+                    if (currentUser is not null)
+                    {
+                        collectionSource.Criteria["CustomFilter"] = CriteriaOperator.Parse("Contains(From, ?)", currentUser.Email);
+                    }
+                }
+             }
+
+            
 
         }
         protected override void OnViewControlsCreated()

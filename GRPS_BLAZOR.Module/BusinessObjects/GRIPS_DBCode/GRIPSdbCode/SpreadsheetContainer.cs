@@ -17,8 +17,12 @@ using System.Text;
 
 namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
 {
-    [DefaultClassOptions]
-    
+
+    public enum SpreadSheetStatus
+    {
+        Created = 0,
+        Completed = 1,
+    }
     public class SpreadsheetContainer : BaseObject
     { 
         public SpreadsheetContainer(Session session)
@@ -36,10 +40,18 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
         }
 
 
+        SpreadSheetStatus status;
         ApplicationUser createdBy;
         string companyName;
         string companyCode;
         string fileName;
+
+        
+        public SpreadSheetStatus Status
+        {
+            get => status;
+            set => SetPropertyValue(nameof(Status), ref status, value);
+        }
 
         [Size(SizeAttribute.DefaultStringMappingFieldSize)]
         public string FileName

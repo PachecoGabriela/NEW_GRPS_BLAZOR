@@ -28,11 +28,7 @@
           <Item Id="TotalPackWeight_ListView" ImageName="CalculationOptions" />
         </Items>
       </Item>
-      <Item Id="Default" Caption="Security System">
-        <Items>
-          <Item Id="SpreadsheetContainer_ListView" Removed="True" />
-        </Items>
-      </Item>
+      <Item Id="Default" Caption="Security System" />
       <Item Id="Grips Desktop">
         <Items>
           <Item Id="ProductsDashboard" Caption="Products" ViewId="Products_Dashboard" Index="0" ImageName="ProductQuickShippments" IsNewNode="True" />
@@ -45,9 +41,9 @@
           <Item Id="SpreadsheetContainer_ListView" ViewId="SpreadsheetContainer_ListView" ObjectKey="" ImageName="Action_Export_ToXLS" Index="7" IsNewNode="True" />
           <Item Id="EmailsItem" Caption="Emails" Index="8" IsNewNode="True">
             <Items IsNewNode="True">
-              <Item Id="DraftEmails" Caption="Drafts" ChildItemsDisplayStyle="LargeIcons" ViewId="EmailObject_ListView_Draft" IsNewNode="True" />
-              <Item Id="EmailsSent" Caption="Sent" ViewId="EmailObject_ListView_Sent" IsNewNode="True" />
-              <Item Id="ReceivedEmails" Caption="Received" ViewId="EmailObject_ListView_Received" IsNewNode="True" />
+              <Item Id="DraftEmails" Caption="Drafts" ChildItemsDisplayStyle="LargeIcons" ViewId="EmailObject_ListView_Draft" ImageName="DraftView_32x32" IsNewNode="True" />
+              <Item Id="EmailsSent" Caption="Sent" ViewId="EmailObject_ListView_Sent" ImageName="Actions_EnvelopeOpen" IsNewNode="True" />
+              <Item Id="ReceivedEmails" Caption="Received" ViewId="EmailObject_ListView_Received" ImageName="Actions_EnvelopeClose" IsNewNode="True" />
             </Items>
           </Item>
         </Items>
@@ -433,7 +429,7 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <DetailView Id="EmailObject_DetailView_Draft" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" IsNewNode="True">
+    <DetailView Id="EmailObject_DetailView_Draft" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" AllowNew="False" IsNewNode="True">
       <Items IsNewNode="True">
         <PropertyEditor Id="FileLinks" PropertyName="FileLinks" IsNewNode="True" />
         <PropertyEditor Id="Message" PropertyName="Message" IsNewNode="True" />
@@ -516,7 +512,7 @@
         <ColumnInfo Id="Subject" PropertyName="Subject" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
       </Columns>
     </ListView>
-    <ListView Id="EmailObject_ListView_Sent" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" DetailViewID="EmailObject_DetailView_Sent" Criteria="[Sent] = True And [Received] = False" IsNewNode="True">
+    <ListView Id="EmailObject_ListView_Sent" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" DetailViewID="EmailObject_DetailView_Sent" Criteria="[Sent] = True" IsNewNode="True">
       <Columns IsNewNode="True">
         <ColumnInfo Id="Message" PropertyName="Message" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />

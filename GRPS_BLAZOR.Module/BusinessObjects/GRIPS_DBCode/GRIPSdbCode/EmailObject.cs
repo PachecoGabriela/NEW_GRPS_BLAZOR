@@ -29,8 +29,8 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
         }
 
 
+        SpreadsheetContainer originContainer;
         FileDataEmail uploadFile;
-        SpreadsheetContainer spreadSheetOrigin;
         string from;
         string emailAddressSender;
         string emailSentFrom;
@@ -133,6 +133,13 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
             set => SetPropertyValue(nameof(EmailSentFrom), ref emailSentFrom, value);
         }
 
+        [NoForeignKey]
+        public SpreadsheetContainer OriginContainer
+        {
+            get => originContainer;
+            set => SetPropertyValue(nameof(OriginContainer), ref originContainer, value);
+        }
+
         [Association("EmailObject-Files"), DevExpress.Xpo.Aggregated]
         public XPCollection<FileDataEmail> Files
         {
@@ -153,8 +160,8 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
         }
 
 
-        [Browsable(false)]
-        List<Supplier> suppliersSelected = new List<Supplier>();
+
+        public List<Supplier> suppliersSelected { get; set; } = new List<Supplier>();
 
         protected override void OnChanged(string propertyName, object oldValue, object newValue)
         {
