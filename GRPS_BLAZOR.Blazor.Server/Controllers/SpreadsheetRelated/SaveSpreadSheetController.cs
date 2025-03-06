@@ -58,7 +58,7 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.SpreadsheetRelated
 
             if (CurrentObject == null || CurrentObject.SpreadsheetFile == null)
             {
-                throw new UserFriendlyException("No hay archivo para validar.");
+                throw new UserFriendlyException("There is no file to validate.");
             }
 
             bool isValid = ValidateExcel(CurrentObject.SpreadsheetFile);
@@ -98,10 +98,9 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.SpreadsheetRelated
                     IWorkbook workbook = application.Workbooks.Open(stream);
                     IWorksheet worksheet = workbook.Worksheets[0];
 
-                    int rowCount = worksheet.Rows.Length; // Obtiene la cantidad real de filas con datos
-                    int colCount = worksheet.UsedRange.LastColumn - 3; // Última columna con datos
+                    int rowCount = worksheet.Rows.Length; 
+                    int colCount = worksheet.UsedRange.LastColumn - 2;
 
-                    // Encontrar la última fila con datos reales
                     int lastRowWithData = startRow;
                     for (int row = startRow; row < rowCount; row++)
                     {
@@ -110,27 +109,31 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.SpreadsheetRelated
                             IRange cell = worksheet[row, col];
                             if (!string.IsNullOrWhiteSpace(cell.DisplayText))
                             {
-                                lastRowWithData = row; // Guarda la última fila donde se encontró dato
+                                lastRowWithData = row; 
                                 break;
                             }
                         }
                     }
 
-                    // Validar solo las filas con datos
                     for (int row = startRow; row <= lastRowWithData; row++)
                     {
                         for (int col = 1; col <= colCount; col++)
                         {
+                            if (col == 3 || col == 9)
+                                continue;
+
                             IRange cell = worksheet[row, col];
+                            var colnumber = col;
+                            var colvalue = cell.DisplayText;
                             if (string.IsNullOrWhiteSpace(cell.DisplayText))
                             {
-                                return false; // Hay celdas vacías en una fila con datos
+                                return false; 
                             }
                         }
                     }
                 }
             }
-            return true; // Todas las filas con datos están completas
+            return true; 
         }
 
 

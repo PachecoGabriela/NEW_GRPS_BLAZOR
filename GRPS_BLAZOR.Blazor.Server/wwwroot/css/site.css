@@ -10,15 +10,14 @@ app {
 .header-logo {
     flex-shrink: 0;
     background-color: currentColor;
-    -webkit-mask: url('../images/Logo.svg');
-    mask: url('../images/Logo.svg');
-    -webkit-mask-position: center;
+    background-image: url('../images/grips_logo.png');
     mask-position: center;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    width: 28px;
-    height: 24px;
+    width: 39px;
+    height: 50px;
 }
+
 
 #blazor-error-ui {
     background: inherit;

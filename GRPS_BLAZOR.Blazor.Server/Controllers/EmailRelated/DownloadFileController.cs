@@ -1,66 +1,37 @@
-﻿using DevExpress.ExpressApp;
-using GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DevExpress.Data.Filtering;
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Actions;
+using DevExpress.ExpressApp.Editors;
+using DevExpress.ExpressApp.Layout;
+using DevExpress.ExpressApp.Model.NodeGenerators;
+using DevExpress.ExpressApp.SystemModule;
+using DevExpress.ExpressApp.Templates;
+using DevExpress.ExpressApp.Utils;
+using DevExpress.Persistent.Base;
+using DevExpress.Persistent.Validation;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class DownloadFileController : ControllerBase
+    // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewController.
+    public partial class DownloadFileController : ViewController
     {
-        private readonly IObjectSpaceProvider objectSpaceProvider;
-
-        public DownloadFileController(IObjectSpaceProvider objectSpaceProvider)
+        public DownloadFileController()
         {
-            this.objectSpaceProvider = objectSpaceProvider;
-        }
+            var downloadAction = new SimpleAction(this, "Download a File", PredefinedCategory.Save);
 
-        [HttpGet("download/{id}")]
-        public IActionResult DownloadFile(Guid id)
-        {
-            using (var objectSpace = objectSpaceProvider.CreateObjectSpace())
-            {
-                // Obtén el archivo usando el id (Oid)
-                var fileDataEmail = objectSpace.GetObjectByKey<FileDataEmail>(id);
-
-                if (fileDataEmail == null)
-                {
-                    return NotFound(); // Retorna un 404 si no se encuentra el archivo
-                }
-
-                // Determina el tipo de contenido según la extensión del archivo
-                string contentType;
-                string fileExtension = Path.GetExtension(fileDataEmail.FileName).ToLowerInvariant();
-
-                switch (fileExtension)
-                {
-                    case ".csv":
-                        contentType = "text/csv";
-                        break;
-                    case ".txt":
-                        contentType = "text/plain";
-                        break;
-                    case ".pdf":
-                        contentType = "application/pdf";
-                        break;
-                    case ".xlsx":
-                        contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                        break;
-                    // Agrega más tipos de contenido según tus necesidades
-                    default:
-                        contentType = "application/octet-stream"; // Tipo por defecto
-                        break;
-                }
-
-                // Configura la respuesta para la descarga del archivo
-                var result = new FileContentResult(fileDataEmail.Content, contentType)
-                {
-                    FileDownloadName = fileDataEmail.FileName
-                };
-
-                return result; // Devuelve el archivo como resultado
-            }
+            downloadAction.Execute += async (s, e) => {
+                IJSRuntime jsRuntime = Application.ServiceProvider.GetRequiredService<IJSRuntime>();
+                NavigationManager navigationManager = Application.ServiceProvider.GetRequiredService<NavigationManager>();
+                var fileName = "Planificación - Copy";
+                var fileURL = $"{navigationManager.BaseUri}api/File/Download?fileName={fileName}";
+                await jsRuntime.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
+            };
         }
     }
 }

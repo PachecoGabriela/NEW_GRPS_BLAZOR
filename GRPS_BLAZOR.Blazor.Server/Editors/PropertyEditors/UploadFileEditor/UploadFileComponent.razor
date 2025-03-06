@@ -7,9 +7,10 @@
           AllowPause="ComponentModel.AllowPause"
           ShowSelectButton="true"
           ExternalDropZoneCssSelector="#overviewDemoDropZone"
-          ExternalDropZoneDragOverCssClass="custom-drag-over border-light text-white"
+          ExternalDropZoneDragOverCssClass="custom-drag-over"
           UploadUrl="@ComponentModel.UploadUrl"
-          SelectedFilesChanged="@SelectedFilesChanged">
+          SelectedFilesChanged="@SelectedFilesChanged"
+          Style="display: flex; justify-content: center; margin-top: 10px;">
 </DxUpload>
 @code {
     [Parameter]

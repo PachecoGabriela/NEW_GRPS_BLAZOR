@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
   <ActionDesign>
+    <Actions>
+      <Action Id="Delete" CustomCSSClassName="ActionStyle" />
+      <Action Id="Export" CustomCSSClassName="ActionStyle" />
+      <Action Id="FullTextSearch" CustomCSSClassName="ActionStyle" />
+      <Action Id="New" CustomCSSClassName="ActionStyle" />
+      <Action Id="NextObject" CustomCSSClassName="ActionStyle" />
+      <Action Id="PreviousObject" CustomCSSClassName="ActionStyle" />
+      <Action Id="Refresh" CustomCSSClassName="ActionStyle" />
+      <Action Id="SaveAndClose" CustomCSSClassName="ActionStyle" />
+      <Action Id="SaveAndNew" CustomCSSClassName="ActionStyle" />
+    </Actions>
     <ActionToContainerMapping>
       <ActionContainer Id="Edit">
         <ActionLink ActionId="Edit" Index="0" IsNewNode="True" />
@@ -20,6 +31,7 @@
         <Member Name="Message" PropertyEditorType="DevExpress.ExpressApp.Office.Blazor.Editors.RichTextPropertyEditor" DocumentStorageFormat="Html" />
       </OwnMembers>
     </Class>
+    <Class Name="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.SpreadsheetContainer" DefaultDetailViewImage="AboveAverage_16x16" DefaultListViewImage="AboveAverage_16x16" />
   </BOModel>
   <NavigationItems>
     <Items>
@@ -432,6 +444,7 @@
     <DetailView Id="EmailObject_DetailView_Draft" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" AllowNew="False" IsNewNode="True">
       <Items IsNewNode="True">
         <PropertyEditor Id="FileLinks" PropertyName="FileLinks" IsNewNode="True" />
+        <PropertyEditor Id="Files" PropertyName="Files" View="EmailObject_Files_ListView" AllowEdit="False" IsNewNode="True" />
         <PropertyEditor Id="Message" PropertyName="Message" IsNewNode="True" />
         <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
         <PropertyEditor Id="Subject" PropertyName="Subject" IsNewNode="True" />
@@ -440,15 +453,15 @@
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="11.864406779661017" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="12.06581352833638" IsNewNode="True">
             <LayoutGroup Id="EmailObject" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-              <LayoutItem Id="Subject" ViewItem="Subject" ShowCaption="" Index="0" RelativeSize="51.42857142857143" IsNewNode="True" />
-              <LayoutItem Id="To" ViewItem="To" ShowCaption="" Index="1" RelativeSize="48.57142857142857" IsNewNode="True" />
+              <LayoutItem Id="Subject" ViewItem="Subject" ShowCaption="" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
+              <LayoutItem Id="To" ViewItem="To" ShowCaption="" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="88.13559322033899" Caption="Message" IsNewNode="True">
-            <LayoutItem Id="UploadFile" ViewItem="UploadFile" Index="0" RelativeSize="5.769230769230769" IsNewNode="True" />
-            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="1" RelativeSize="94.23076923076923" IsNewNode="True" />
+          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="87.93418647166362" Caption="Message" IsNewNode="True">
+            <LayoutItem Id="UploadFile" ViewItem="UploadFile" Index="0" RelativeSize="6.029106029106029" IsNewNode="True" />
+            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="1" RelativeSize="93.97089397089397" IsNewNode="True" />
           </LayoutGroup>
         </LayoutGroup>
       </Layout>
@@ -1016,6 +1029,26 @@
         <ColumnInfo Id="HasBOM" Index="7" />
       </Columns>
     </ListView>
+    <DetailView Id="SpreadsheetContainer_DetailView">
+      <Items>
+        <PropertyEditor Id="Status" AllowEdit="False" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="17.81021897810219">
+            <LayoutGroup Id="SpreadsheetContainer" RelativeSize="100">
+              <LayoutItem Id="FileName" Index="0" RelativeSize="29.508196721311474" />
+              <LayoutItem Id="Status" Index="1" RelativeSize="21.311475409836067" />
+              <LayoutItem Id="CompanyCode" RelativeSize="21.311475409836067" />
+              <LayoutItem Id="CompanyName" RelativeSize="27.868852459016395" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SpreadsheetFile_Group" Direction="Vertical" RelativeSize="82.18978102189782">
+            <LayoutItem Id="SpreadsheetFile" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="Supplier_ChangeHistory_ListView">
       <Columns>
         <ColumnInfo Id="ModifiedOn" DisplayFormat="{0:G}" />

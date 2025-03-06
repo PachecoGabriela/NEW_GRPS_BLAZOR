@@ -155,7 +155,8 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
         {
             get
             {
-                return string.Join("<br/>", Files.Select(file => $"<a href='/api/file/download/{file.Oid}' download>{file.FileName}</a>"));
+                return string.Join("<br/>", Files.Select(file =>$"<a href='/api/downloadfile/download/{file.Oid}' download>{file.FileName}</a>"));
+
             }
         }
 
@@ -170,17 +171,13 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
             {
                 if (this.UploadFile is not null)
                 {
-                    // Crea una nueva instancia de FileDataEmail
                     var fileDataEmail = new FileDataEmail(Session);
 
-                    // Abre el flujo del archivo subido
                     using (var stream = uploadedFile.OpenReadStream())
                     {
-                        // Carga los datos del archivo en la instancia de FileDataEmail
                         fileDataEmail.LoadFromStream(uploadedFile.FileName, stream);
                     }
 
-                    // Agrega el archivo a la colección Files
                     Files.Add(fileDataEmail);
 
                 }

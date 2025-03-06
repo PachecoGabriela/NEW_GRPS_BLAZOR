@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
+using DevExpress.ExpressApp.Blazor;
 using DevExpress.ExpressApp.Blazor.Editors;
 using DevExpress.ExpressApp.Editors;
 using DevExpress.ExpressApp.Layout;
@@ -34,6 +35,7 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
         SimpleAction SendEmail;
         PopupWindowShowAction ShowSuppliers;
         EmailObject CurrentObject;
+        SimpleAction DownloadAttachment;
         public SendGridClientManager SendGridM { get; set; }
         public EmailDraftController()
         {
@@ -54,6 +56,36 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             ShowSuppliers.ImageName = "ListBullets_32x32";
             ShowSuppliers.CustomizePopupWindowParams += ShowSuppliers_CustomizePopupWindowParams; ;
             ShowSuppliers.Executed += ShowSuppliers_Executed;
+
+            DownloadAttachment = new SimpleAction(this, "DownloadAttachemntButton", PredefinedCategory.View);
+            DownloadAttachment.Caption = "Download Attachments";
+            DownloadAttachment.Execute += DownloadAttachment_Execute;
+        }
+
+        private void DownloadAttachment_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            CurrentObject = View.CurrentObject as EmailObject;
+            var archivos = CurrentObject.Files.ToList();
+
+            var httpContext = ((BlazorApplication)Application).ServiceProvider.GetService(typeof(IHttpContextAccessor)) as IHttpContextAccessor;
+            if (httpContext?.HttpContext == null || archivos.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var archivo in archivos)
+            {
+                if (archivo.Content != null)
+                {
+                    string fileName = archivo.FileName;
+                    byte[] fileContent = archivo.Content;
+
+                    httpContext.HttpContext.Response.Headers.Add("Content-Disposition", $"attachment; filename={fileName}");
+                    httpContext.HttpContext.Response.ContentType = "application/octet-stream";
+                    httpContext.HttpContext.Response.Body.WriteAsync(fileContent, 0, fileContent.Length);
+                    httpContext.HttpContext.Response.Body.Flush();
+                }
+            }
         }
 
         private void ShowSuppliers_Executed(object sender, ActionBaseEventArgs e)
@@ -199,7 +231,7 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             {
                 return mimeType;
             }
-            return "application/octet-stream"; // Tipo genérico para archivos desconocidos
+            return "application/octet-stream"; 
         }
 
         private void CreateRecords(SpreadsheetContainer selectedRecord, Supplier currentSupplier, EmailObject currentObject, string supplierEmailsList, Session session)
@@ -234,16 +266,6 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 
             string sqlEmail = $"INSERT INTO [EmailObject] ([Oid],[Subject],[ToEmail],[Message],[CompanyCode],[EmailSentFrom],[Received]) values (@p0,@p1,@p2,@p3,@p4,@p5,@p6)";
             session.ExecuteNonQuery(sqlEmail, EParameter);
-        }
-
-        static IDataLayer CreateDataLayer(bool threadSafe, string connStr)
-        {
-            ReflectionDictionary dictionary = new ReflectionDictionary();
-            AutoCreateOption autoCreateOption = AutoCreateOption.SchemaAlreadyExists;
-            IDataStore provider = XpoDefault.GetConnectionProvider(connStr, autoCreateOption);
-            var localdl = threadSafe ? (IDataLayer)new ThreadSafeDataLayer(dictionary, provider) : new SimpleDataLayer(dictionary, provider);
-
-            return localdl;
         }
 
         protected override void OnActivated()

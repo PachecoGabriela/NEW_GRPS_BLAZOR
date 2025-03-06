@@ -17,6 +17,8 @@ using DevExpress.Xpo;
 using GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPS_schema;
 using XafCustomComponents.Services;
 using GRPS_BLAZOR.Blazor.Server.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GRPS_BLAZOR.Blazor.Server;
 
@@ -41,7 +43,13 @@ public class Startup {
         {
             options.MaximumReceiveMessageSize = 1024 * 1024 * 100; // 100 MB
         });
-        
+
+        services.AddAuthorizationBuilder()
+            .SetDefaultPolicy(new AuthorizationPolicyBuilder(
+                JwtBearerDefaults.AuthenticationScheme, CookieAuthenticationDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .RequireXafAuthentication()
+                    .Build());
 
         services.AddHttpContextAccessor();
         services.AddScoped<CircuitHandler, CircuitHandlerProxy>();

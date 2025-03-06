@@ -16,9 +16,15 @@ namespace GRPS_BLAZOR.Blazor.Server.Editors.PropertyEditors.UploadFileEditor
             //UploadUrl = $"/api/Upload/UploadFile";
             AllowMultiFileUpload = true;
             DropZone = @"
-<div id=""overviewDemoDropZone"" class=""card custom-drop-zone jumbotron custom-center"">
-    <svg class=""drop-file-icon mb-3"" role=""img"" style=""width: 42px; height: 42px;""></svg>
-          <span>Drag and Drop File Here</span>
+<div id=""overviewDemoDropZone"" style=""
+    border: 2px dashed #ccc;
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 10px;"">
+    <svg class=""drop-file-icon mb-3"" role=""img"" style=""width: 42px; height: 42px; fill: #6c757d;""></svg>
+    <span style=""font-size: 16px; color: #555;"">Drag and Drop File Here</span>
 </div>
 ";
         }

@@ -15,6 +15,16 @@
     <base href="~/" />
     <link rel="stylesheet" href="css/fontawesome-free-6.0.0-web/css/all.css">
     <component type="typeof(BootstrapThemeLink)" render-mode="Static" />
+    <style>
+        .newBackground {
+            background-color: #15a362;
+            color: white !important;
+        }
+
+        .ActionStyle {
+            filter: hue-rotate(100deg);
+        }
+    </style>
 </head>
 <body>
     @{
@@ -58,6 +68,15 @@
         </div>
 
         <script src="_framework/blazor.server.js"></script>
+        <script>
+            window.triggerFileDownload = (fileName, url) => {
+                const anchorElement = document.createElement('a');
+                anchorElement.href = url;
+                anchorElement.download = encodeURIComponent(fileName) ?? '';
+                anchorElement.click();
+                anchorElement.remove();
+            }
+        </script>
     }
 </body>
 </html>
