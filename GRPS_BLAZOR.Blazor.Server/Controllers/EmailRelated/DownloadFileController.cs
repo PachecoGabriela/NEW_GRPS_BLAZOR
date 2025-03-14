@@ -7,31 +7,33 @@ using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Actions;
 using DevExpress.ExpressApp.Editors;
 using DevExpress.ExpressApp.Layout;
-using DevExpress.ExpressApp.Model.NodeGenerators;
-using DevExpress.ExpressApp.SystemModule;
-using DevExpress.ExpressApp.Templates;
-using DevExpress.ExpressApp.Utils;
-using DevExpress.Persistent.Base;
-using DevExpress.Persistent.Validation;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 {
-    // For more typical usage scenarios, be sure to check out https://docs.devexpress.com/eXpressAppFramework/DevExpress.ExpressApp.ViewController.
-    public partial class DownloadFileController : ViewController
+    [Route("api/downloadfile")]
+    [ApiController]
+    public partial class DownloadFileController : ControllerBase
     {
-        public DownloadFileController()
-        {
-            var downloadAction = new SimpleAction(this, "Download a File", PredefinedCategory.Save);
+        private readonly IObjectSpaceFactory objectSpaceFactory;
 
-            downloadAction.Execute += async (s, e) => {
-                IJSRuntime jsRuntime = Application.ServiceProvider.GetRequiredService<IJSRuntime>();
-                NavigationManager navigationManager = Application.ServiceProvider.GetRequiredService<NavigationManager>();
-                var fileName = "Planificación - Copy";
-                var fileURL = $"{navigationManager.BaseUri}api/File/Download?fileName={fileName}";
-                await jsRuntime.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
-            };
+        public DownloadFileController(IObjectSpaceFactory objectSpaceFactory)
+        {
+            this.objectSpaceFactory = objectSpaceFactory;
+        }
+
+        [HttpGet("download/{id}")]
+        public IActionResult DownloadFile(Guid id)
+        {
+            using (var objectSpace = objectSpaceFactory.CreateObjectSpace(typeof(FileDataEmail)))
+            {
+                var file = objectSpace.GetObjectByKey<FileDataEmail>(id);
+                if (file == null || file.Content == null)
+                    return NotFound("El archivo no existe.");
+
+                return File(file.Content, "application/octet-stream", file.FileName);
+            }
         }
     }
 }

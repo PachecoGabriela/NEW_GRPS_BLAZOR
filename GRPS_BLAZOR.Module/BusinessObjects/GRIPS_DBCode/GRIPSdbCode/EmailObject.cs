@@ -29,6 +29,7 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
         }
 
 
+        string attachments;
         SpreadsheetContainer originContainer;
         FileDataEmail uploadFile;
         string from;
@@ -151,16 +152,61 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
 
         [NonPersistent]
         [Size(SizeAttribute.Unlimited)]
-        public string FileLinks
+        [ImmediatePostData]
+        public string FilesUploaded
         {
             get
             {
-                return string.Join("<br/>", Files.Select(file =>$"<a href='/api/downloadfile/download/{file.Oid}' download>{file.FileName}</a>"));
-
+                return string.Join("<br/>", Files.Select(file =>
+            $"<span id='file-{file.Oid}'>" +
+            $"<a href='#' onclick='downloadFile(event, \"/api/downloadfile/download/{file.Oid}\", \"{file.FileName}\")'>{file.FileName}</a> " +
+            $"<button onclick='deleteFile(\"{file.Oid}\")' style='background:none;border:none;color:#15a362;cursor:pointer;'>❌</button>" +
+            "</span>")) +
+            "<script>" +
+            "async function deleteFile(fileOid) { " +
+            "    try { " +
+            "        let response = await fetch(`/api/downloadfile/delete/${fileOid}`, { method: 'DELETE' });" +
+            "        if (response.ok) { " +
+            "            document.getElementById('file-' + fileOid).remove(); " +
+            "        } else { " +
+            "            alert('Error when deleting document.'); " +
+            "        }" +
+            "    } catch (error) { alert('Error de conexión.'); }" +
+            "}" +
+            "function downloadFile(event, url, filename) { " +
+            "    event.preventDefault(); " +
+            "    var a = document.createElement('a');" +
+            "    a.href = url;" +
+            "    a.setAttribute('download', filename);" +
+            "    document.body.appendChild(a);" +
+            "    a.click();" +
+            "    document.body.removeChild(a);" +
+            "}" +
+            "</script>";
             }
         }
 
-
+        [NonPersistent]
+        [Size(SizeAttribute.DefaultStringMappingFieldSize)]
+        public string Attachments
+        {
+            get
+            {
+                return string.Join("<br/>", Files.Select(file =>
+            $"<a href='#' onclick='downloadFile(\"/api/downloadfile/download/{file.Oid}\", \"{file.FileName}\")'>{file.FileName}</a>")) +
+            "<script>" +
+            "function downloadFile(url, filename) { " +
+            "    event.preventDefault(); " +
+            "    var a = document.createElement('a');" +
+            "    a.href = url;" +
+            "    a.setAttribute('download', filename);" +
+            "    document.body.appendChild(a);" +
+            "    a.click();" +
+            "    document.body.removeChild(a);" +
+            "}" +
+            "</script>";
+            }
+        }
 
         public List<Supplier> suppliersSelected { get; set; } = new List<Supplier>();
 

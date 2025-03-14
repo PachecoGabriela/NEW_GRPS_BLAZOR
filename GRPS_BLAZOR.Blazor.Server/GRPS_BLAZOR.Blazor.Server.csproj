@@ -9,10 +9,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Controllers\EmailRelated\DownloadFileController.cs" />
-    <Compile Remove="Controllers\EmailRelated\DownloadFileController.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Model.xafml" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Update="UnusableNodes.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes10.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes11.xml">
       <DependentUpon>Model.xafml</DependentUpon>
     </None>
     <None Update="UnusableNodes2.xml">

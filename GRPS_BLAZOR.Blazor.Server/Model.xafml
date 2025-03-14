@@ -27,7 +27,8 @@
   <BOModel>
     <Class Name="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject">
       <OwnMembers>
-        <Member Name="FileLinks" PropertyEditorType="GRPS_BLAZOR.Blazor.Server.Editors.PropertyEditors.UploadFileEditor.LabelPropertyEditor" DocumentStorageFormat="Html" />
+        <Member Name="Attachments" PropertyEditorType="GRPS_BLAZOR.Blazor.Server.Editors.PropertyEditors.UploadFileEditor.LabelPropertyEditor" />
+        <Member Name="FilesUploaded" PropertyEditorType="GRPS_BLAZOR.Blazor.Server.Editors.PropertyEditors.UploadFileEditor.LabelPropertyEditor" />
         <Member Name="Message" PropertyEditorType="DevExpress.ExpressApp.Office.Blazor.Editors.RichTextPropertyEditor" DocumentStorageFormat="Html" />
       </OwnMembers>
     </Class>
@@ -441,10 +442,35 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <DetailView Id="EmailObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="24.635036496350367">
+            <LayoutGroup Id="EmailObject" RelativeSize="100">
+              <LayoutGroup Id="EmailObject_col1" RelativeSize="49.92947813822285">
+                <LayoutItem Id="Subject" RelativeSize="36.170212765957444" />
+                <LayoutItem Id="To" RelativeSize="27.659574468085108" />
+                <LayoutItem Id="UploadFile" RelativeSize="36.170212765957444" />
+              </LayoutGroup>
+              <LayoutGroup Id="EmailObject_col2" RelativeSize="50.07052186177715">
+                <LayoutItem Id="OriginContainer" RelativeSize="36.170212765957444" />
+                <LayoutItem Id="Attachments" RelativeSize="63.829787234042556" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="75.36496350364963">
+            <LayoutItem Id="ToEmail" RelativeSize="33.41404358353511" />
+            <LayoutItem Id="Message" RelativeSize="31.961259079903147" />
+            <LayoutItem Id="FilesUploaded" RelativeSize="34.624697336561745" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <DetailView Id="EmailObject_DetailView_Draft" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" AllowNew="False" IsNewNode="True">
       <Items IsNewNode="True">
-        <PropertyEditor Id="FileLinks" PropertyName="FileLinks" IsNewNode="True" />
         <PropertyEditor Id="Files" PropertyName="Files" View="EmailObject_Files_ListView" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="FilesUploaded" PropertyName="FilesUploaded" IsNewNode="True" />
         <PropertyEditor Id="Message" PropertyName="Message" IsNewNode="True" />
         <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
         <PropertyEditor Id="Subject" PropertyName="Subject" IsNewNode="True" />
@@ -453,21 +479,23 @@
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="12.06581352833638" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="12.043795620437956" IsNewNode="True">
             <LayoutGroup Id="EmailObject" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="Subject" ViewItem="Subject" ShowCaption="" Index="0" RelativeSize="51.515151515151516" IsNewNode="True" />
               <LayoutItem Id="To" ViewItem="To" ShowCaption="" Index="1" RelativeSize="48.484848484848484" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="87.93418647166362" Caption="Message" IsNewNode="True">
-            <LayoutItem Id="UploadFile" ViewItem="UploadFile" Index="0" RelativeSize="6.029106029106029" IsNewNode="True" />
-            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="1" RelativeSize="93.97089397089397" IsNewNode="True" />
+          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="87.95620437956204" Caption="Message" IsNewNode="True">
+            <LayoutItem Id="UploadFile" ViewItem="UploadFile" Index="0" RelativeSize="6.016597510373444" IsNewNode="True" />
+            <LayoutItem Id="FilesUploaded" ViewItem="FilesUploaded" Index="1" RelativeSize="14.937759336099585" IsNewNode="True" />
+            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="2" RelativeSize="79.04564315352697" IsNewNode="True" />
           </LayoutGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
     <DetailView Id="EmailObject_DetailView_Received" CaptionColon=":" EnableCaptionColon="False" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" RequiredFieldMark="*" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" IsNewNode="True">
       <Items IsNewNode="True">
+        <PropertyEditor Id="Attachments" PropertyName="Attachments" IsNewNode="True" />
         <PropertyEditor Id="Message" PropertyName="Message" IsNewNode="True" />
         <PropertyEditor Id="Oid" PropertyName="Oid" IsNewNode="True" />
         <PropertyEditor Id="Subject" PropertyName="Subject" IsNewNode="True" />
@@ -476,14 +504,15 @@
       </Items>
       <Layout IsNewNode="True">
         <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
-          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="11.864406779661017" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="10.218978102189782" IsNewNode="True">
             <LayoutGroup Id="EmailObject" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
               <LayoutItem Id="Subject" ViewItem="Subject" ShowCaption="" Index="0" RelativeSize="51.42857142857143" IsNewNode="True" />
               <LayoutItem Id="ToEmail" ViewItem="ToEmail" Index="1" RelativeSize="48.57142857142857" IsNewNode="True" />
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="88.13559322033899" IsNewNode="True">
-            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+          <LayoutGroup Id="SizeableEditors" Index="1" ShowCaption="False" RelativeSize="89.78102189781022" Caption="Message" IsNewNode="True">
+            <LayoutItem Id="Attachments" ViewItem="Attachments" Index="0" RelativeSize="4.878048780487805" IsNewNode="True" />
+            <LayoutItem Id="Message" ViewItem="Message" ShowCaption="" Index="1" RelativeSize="95.1219512195122" IsNewNode="True" />
           </LayoutGroup>
         </LayoutGroup>
       </Layout>
@@ -509,7 +538,7 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="EmailObject_ListView_Draft" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" DetailViewID="EmailObject_DetailView_Draft" Criteria="[Sent] = False And [Received] = False" IsNewNode="True">
+    <ListView Id="EmailObject_ListView_Draft" ClassName="GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode.EmailObject" DetailViewID="EmailObject_DetailView_Draft" Criteria="[Sent] = False And [Received] = False" AllowNew="False" IsNewNode="True">
       <Columns IsNewNode="True">
         <ColumnInfo Id="Message" PropertyName="Message" Index="-1" IsNewNode="True" />
         <ColumnInfo Id="Oid" PropertyName="Oid" Index="-1" IsNewNode="True" />

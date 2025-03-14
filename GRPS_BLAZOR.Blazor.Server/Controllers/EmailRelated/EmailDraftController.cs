@@ -35,7 +35,6 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
         SimpleAction SendEmail;
         PopupWindowShowAction ShowSuppliers;
         EmailObject CurrentObject;
-        SimpleAction DownloadAttachment;
         public SendGridClientManager SendGridM { get; set; }
         public EmailDraftController()
         {
@@ -56,10 +55,6 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             ShowSuppliers.ImageName = "ListBullets_32x32";
             ShowSuppliers.CustomizePopupWindowParams += ShowSuppliers_CustomizePopupWindowParams; ;
             ShowSuppliers.Executed += ShowSuppliers_Executed;
-
-            DownloadAttachment = new SimpleAction(this, "DownloadAttachemntButton", PredefinedCategory.View);
-            DownloadAttachment.Caption = "Download Attachments";
-            DownloadAttachment.Execute += DownloadAttachment_Execute;
         }
 
         private void DownloadAttachment_Execute(object sender, SimpleActionExecuteEventArgs e)
@@ -164,11 +159,13 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             bool response = false;
             Supplier CurrentSupplier;
             string supplierEmailsList;
+            var session = ((XPObjectSpace)ObjectSpace).Session;
 
             if (CurrentObject.suppliersSelected.Any())
             {
                 if (!string.IsNullOrEmpty(CurrentObject.Subject))
                 {
+                    var Attachments = CurrentObject.Files.ToList();
                     foreach (var Supplier in CurrentObject.suppliersSelected)
                     {
                         CurrentSupplier = Supplier;
@@ -190,7 +187,6 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
                                 .Select(a => (a.FileName, a.Content, GetMimeType(a.FileName)))
                                 .ToList();
 
-
                             response = await SendGridM.SendEmail(supplierEmailsList, CurrentObject.Message, CurrentObject.Subject, attachments);
                         }
                         else
@@ -201,12 +197,11 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
                         {
                             if (CurrentObject.OriginContainer is not null)
                             {
-                                var session = ((XPObjectSpace)ObjectSpace).Session;
-
-                                CreateRecords(CurrentObject.OriginContainer, CurrentSupplier, CurrentObject, supplierEmailsList, session);
+                                CreateRecords(CurrentObject.OriginContainer, CurrentSupplier, CurrentObject, supplierEmailsList, session, Attachments);
+                                session.CommitTransaction();
                             }
 
-                            Application.ShowViewStrategy.ShowMessage("Emails and spreadheets created succesfully");
+                           
                         }
                     }
 
@@ -214,6 +209,7 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
                     {
                         CurrentObject.Sent = true;
                         View.ObjectSpace.CommitChanges();
+                        Application.ShowViewStrategy.ShowMessage("Emails and spreadheets created succesfully");
                     }
                 }
                 else
@@ -234,38 +230,37 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             return "application/octet-stream"; 
         }
 
-        private void CreateRecords(SpreadsheetContainer selectedRecord, Supplier currentSupplier, EmailObject currentObject, string supplierEmailsList, Session session)
+        private void CreateRecords(SpreadsheetContainer selectedRecord, Supplier currentSupplier, EmailObject currentObject, string supplierEmailsList, Session session, List<FileDataEmail> attachments)
         {
-            QueryParameterCollection SsParameter = new QueryParameterCollection();
-            var IdNewSource = Guid.NewGuid();
-            var IdSource = IdNewSource.ToString();
+            SpreadsheetContainer NewContainer = new SpreadsheetContainer(session);
+            NewContainer.FileName = selectedRecord.FileName;
+            NewContainer.CompanyCode = currentSupplier.Code;
+            NewContainer.CompanyName = currentSupplier.Name;
+            NewContainer.SpreadsheetFile = selectedRecord.SpreadsheetFile;
+            NewContainer.CreatedBy = selectedRecord.CreatedBy;
+            NewContainer.Status = SpreadSheetStatus.Created;
 
-            SsParameter.Add(IdSource);
-            SsParameter.Add(selectedRecord.FileName);
-            SsParameter.Add(currentSupplier.Code);
-            SsParameter.Add(currentSupplier.Name);
-            SsParameter.Add(selectedRecord.SpreadsheetFile);
-            SsParameter.Add(selectedRecord.CreatedBy.Oid);
-            SsParameter.Add((int)SpreadSheetStatus.Created);
+            EmailObject NewEmail = new EmailObject(session);
+            NewEmail.Subject = currentObject.Subject;
+            NewEmail.ToEmail = supplierEmailsList;
+            NewEmail.Message = currentObject.Message;
+            NewEmail.Received = true;
 
-            string sqlDs = $"INSERT INTO [SpreadsheetContainer] ([Oid],[FileName],[CompanyCode],[CompanyName],[SpreadsheetFile],[CreatedBy],[Status]) values (@p0,@p1,@p2,@p3,@p4,@p5,@p6)";
-            session.ExecuteNonQuery(sqlDs, SsParameter);
+            if (attachments.Any())
+            {
+                foreach (FileDataEmail doc in attachments)
+                {
+                    FileDataEmail clonedFile = new FileDataEmail(session)
+                    {
+                        FileName = doc.FileName,
+                        Content = doc.Content
+                    };
+                    NewEmail.Files.Add(clonedFile);
+                }
+            }
 
-            QueryParameterCollection EParameter = new QueryParameterCollection();
-            var IdNewEmail = Guid.NewGuid();
-            var IdEmail = IdNewSource.ToString();
+            session.CommitTransaction();
 
-            EParameter.Add(IdSource);
-            EParameter.Add(currentObject.Subject);
-            EParameter.Add(supplierEmailsList);
-            EParameter.Add(currentObject.Message);
-            EParameter.Add(currentSupplier.Code);
-            EParameter.Add(currentSupplier.Name);
-            EParameter.Add(1);
-            
-
-            string sqlEmail = $"INSERT INTO [EmailObject] ([Oid],[Subject],[ToEmail],[Message],[CompanyCode],[EmailSentFrom],[Received]) values (@p0,@p1,@p2,@p3,@p4,@p5,@p6)";
-            session.ExecuteNonQuery(sqlEmail, EParameter);
         }
 
         protected override void OnActivated()
