@@ -35,6 +35,7 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
         SimpleAction SendEmail;
         PopupWindowShowAction ShowSuppliers;
         EmailObject CurrentObject;
+        List<Supplier> selectedObjects = new List<Supplier>();
         public SendGridClientManager SendGridM { get; set; }
         public EmailDraftController()
         {
@@ -87,12 +88,15 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
         {
             var popupWindowView = e as PopupWindowShowActionExecuteEventArgs;
 
-            var selectedObjects = popupWindowView.PopupWindowView.SelectedObjects.OfType<Supplier>().ToList();
+            selectedObjects = popupWindowView.PopupWindowView.SelectedObjects.OfType<Supplier>().ToList();
 
             if (selectedObjects.Any())
             {
-                CurrentObject.suppliersSelected = selectedObjects;
-                CurrentObject.Save();
+                string suppliersList = string.Join(";", selectedObjects.Select(s => s.Oid));
+
+
+                CurrentObject.SuppliersSelectedOids = suppliersList;
+                CurrentObject.Session.CommitTransaction();
             }
             else
             {
@@ -101,9 +105,9 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 
             List<string> SupplierCodes = new List<string>();
 
-            if (CurrentObject.suppliersSelected.Any())
+            if (selectedObjects.Any())
             {
-                foreach (var supplier in CurrentObject.suppliersSelected)
+                foreach (var supplier in selectedObjects)
                 {
                     SupplierCodes.Add(supplier.Code);
                 }
@@ -129,21 +133,17 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
                 var collectionSource = new CollectionSource(newObjectSpace, typeof(Supplier));
                 var listView = Application.CreateListView("Supplier_ListView", collectionSource, false);
 
-                if (CurrentObject.suppliersSelected.Any())
+                if (!string.IsNullOrEmpty(CurrentObject.SuppliersSelectedOids))
                 {
                     listView.ControlsCreated += (sender, args) =>
                     {
                         DxGridListEditor dxGridListEditor = listView.Editor as DxGridListEditor;
-                       
-                        var selectedOids = CurrentObject.suppliersSelected?.Select(s => s.Oid).ToList();
 
-                        if (selectedOids != null && selectedOids.Any())
+                        AssignSuppliers(CurrentObject, newObjectSpace);
+
+                        if (selectedObjects.Any())
                         {
-                            var objectsToSelect = newObjectSpace.GetObjectsQuery<Supplier>()
-                                .Where(s => selectedOids.Contains(s.Oid))
-                                .ToList();
-
-                            dxGridListEditor.SetSelectedObjects(objectsToSelect);
+                            dxGridListEditor.SetSelectedObjects(selectedObjects);
                         }
 
                     };
@@ -161,63 +161,80 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
             string supplierEmailsList;
             var session = ((XPObjectSpace)ObjectSpace).Session;
 
-            if (CurrentObject.suppliersSelected.Any())
+            if (!string.IsNullOrEmpty(CurrentObject.To))
             {
-                if (!string.IsNullOrEmpty(CurrentObject.Subject))
-                {
-                    var Attachments = CurrentObject.Files.ToList();
-                    foreach (var Supplier in CurrentObject.suppliersSelected)
+                AssignSuppliers(CurrentObject, View.ObjectSpace);
+
+                if (selectedObjects.Any())
+                { 
+                    if (!string.IsNullOrEmpty(CurrentObject.Subject))
                     {
-                        CurrentSupplier = Supplier;
-                        List<string> ContactEmails = new List<string>();
-
-                        foreach (var Contact in Supplier.SupplierContacts)
+                        var Attachments = CurrentObject.Files.ToList();
+                        foreach (var Supplier in selectedObjects)
                         {
-                            ContactEmails.Add(Contact.Email);
+                            CurrentSupplier = Supplier;
+                            List<string> ContactEmails = new List<string>();
+
+                            foreach (var Contact in Supplier.SupplierContacts)
+                            {
+                                ContactEmails.Add(Contact.Email);
+                            }
+                            supplierEmailsList = string.Join("; ", ContactEmails);
+
+                            if (!string.IsNullOrEmpty(supplierEmailsList))
+                            {
+                                SendGridM = Application.ServiceProvider.GetRequiredService<SendGridClientManager>();
+
+                                var UploadedAtachments = CurrentObject.Files;
+
+                                List<(string, byte[], string)> attachments = UploadedAtachments
+                                    .Select(a => (a.FileName, a.Content, GetMimeType(a.FileName)))
+                                    .ToList();
+
+                                response = await SendGridM.SendEmail(supplierEmailsList, CurrentObject.Message, CurrentObject.Subject, attachments);
+                            }
+                            else
+                                Application.ShowViewStrategy.ShowMessage("Make sure the supplier you have selected contains contacts");
+
+
+                            if (response)
+                            {
+                                if (CurrentObject.OriginContainer is not null)
+                                {
+                                    CreateRecords(CurrentObject.OriginContainer, CurrentSupplier, CurrentObject, supplierEmailsList, session, Attachments);
+                                    session.CommitTransaction();
+                                }
+
+                           
+                            }
                         }
-                        supplierEmailsList = string.Join("; ", ContactEmails);
-
-                        if (!string.IsNullOrEmpty(supplierEmailsList))
-                        {
-                            SendGridM = Application.ServiceProvider.GetRequiredService<SendGridClientManager>();
-
-                            var UploadedAtachments = CurrentObject.Files;
-
-                            List<(string, byte[], string)> attachments = UploadedAtachments
-                                .Select(a => (a.FileName, a.Content, GetMimeType(a.FileName)))
-                                .ToList();
-
-                            response = await SendGridM.SendEmail(supplierEmailsList, CurrentObject.Message, CurrentObject.Subject, attachments);
-                        }
-                        else
-                            Application.ShowViewStrategy.ShowMessage("Make sure the supplier you have selected contains contacts");
-
 
                         if (response)
                         {
-                            if (CurrentObject.OriginContainer is not null)
-                            {
-                                CreateRecords(CurrentObject.OriginContainer, CurrentSupplier, CurrentObject, supplierEmailsList, session, Attachments);
-                                session.CommitTransaction();
-                            }
-
-                           
+                            CurrentObject.Sent = true;
+                            View.ObjectSpace.CommitChanges();
+                            Application.ShowViewStrategy.ShowMessage("Emails and spreadheets created succesfully");
                         }
                     }
-
-                    if (response)
-                    {
-                        CurrentObject.Sent = true;
-                        View.ObjectSpace.CommitChanges();
-                        Application.ShowViewStrategy.ShowMessage("Emails and spreadheets created succesfully");
-                    }
+                    else
+                        Application.ShowViewStrategy.ShowMessage("Make sure you define a subject before sending");
                 }
-                else
-                    Application.ShowViewStrategy.ShowMessage("Make sure you define a subject before sending");
             }
             else
                 Application.ShowViewStrategy.ShowMessage("Make sure you select a supplier before sending");
             
+        }
+
+        private void AssignSuppliers(EmailObject currentObject, IObjectSpace newObjectSpace)
+        {
+            var selectedOids = CurrentObject.SuppliersSelectedOids.Split(";").ToList();
+
+            if (selectedOids.Any())
+            {
+                selectedObjects = newObjectSpace.GetObjectsQuery<Supplier>()
+                    .Where(s => selectedOids.Contains(s.Oid.ToString()))
+                    .ToList();
+            }
         }
 
         public string GetMimeType(string fileName)
@@ -232,31 +249,31 @@ namespace GRPS_BLAZOR.Blazor.Server.Controllers.EmailRelated
 
         private void CreateRecords(SpreadsheetContainer selectedRecord, Supplier currentSupplier, EmailObject currentObject, string supplierEmailsList, Session session, List<FileDataEmail> attachments)
         {
-            SpreadsheetContainer NewContainer = new SpreadsheetContainer(session);
-            NewContainer.FileName = selectedRecord.FileName;
-            NewContainer.CompanyCode = currentSupplier.Code;
-            NewContainer.CompanyName = currentSupplier.Name;
-            NewContainer.SpreadsheetFile = selectedRecord.SpreadsheetFile;
-            NewContainer.CreatedBy = selectedRecord.CreatedBy;
-            NewContainer.Status = SpreadSheetStatus.Created;
-
-            EmailObject NewEmail = new EmailObject(session);
-            NewEmail.Subject = currentObject.Subject;
-            NewEmail.ToEmail = supplierEmailsList;
-            NewEmail.Message = currentObject.Message;
-            NewEmail.Received = true;
-
-            if (attachments.Any())
+            var newContainer = new SpreadsheetContainer(session)
             {
-                foreach (FileDataEmail doc in attachments)
+                FileName = selectedRecord.FileName,
+                CompanyCode = currentSupplier.Code,
+                CompanyName = currentSupplier.Name,
+                SpreadsheetFile = selectedRecord.SpreadsheetFile,
+                CreatedBy = selectedRecord.CreatedBy,
+                Status = SpreadSheetStatus.Created
+            };
+
+            var newEmail = new EmailObject(session)
+            {
+                Subject = currentObject.Subject,
+                ToEmail = supplierEmailsList,
+                Message = currentObject.Message,
+                Received = true
+            };
+
+            if (attachments?.Count > 0)
+            {
+                newEmail.Files.AddRange(attachments.Select(doc => new FileDataEmail(session)
                 {
-                    FileDataEmail clonedFile = new FileDataEmail(session)
-                    {
-                        FileName = doc.FileName,
-                        Content = doc.Content
-                    };
-                    NewEmail.Files.Add(clonedFile);
-                }
+                    FileName = doc.FileName,
+                    Content = doc.Content
+                }));
             }
 
             session.CommitTransaction();

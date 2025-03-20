@@ -29,6 +29,7 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
         }
 
 
+        string suppliersSelectedOids;
         string attachments;
         SpreadsheetContainer originContainer;
         FileDataEmail uploadFile;
@@ -208,7 +209,13 @@ namespace GRPS_BLAZOR.Module.BusinessObjects.GRIPS_DBCode.GRIPSdbCode
             }
         }
 
-        public List<Supplier> suppliersSelected { get; set; } = new List<Supplier>();
+        [Size(SizeAttribute.Unlimited)]
+        [Browsable(false)]
+        public string SuppliersSelectedOids
+        {
+            get => suppliersSelectedOids;
+            set => SetPropertyValue(nameof(SuppliersSelectedOids), ref suppliersSelectedOids, value);
+        }
 
         protected override void OnChanged(string propertyName, object oldValue, object newValue)
         {
